@@ -83,7 +83,15 @@ Para testar a aplicação "Bia" em sua máquina local:
     -   No Windows: `rodar_app_local_windows.bat`
 
 ---
+Formação AWS 5.0 - Mentoria de Deasafios 2.0 - @Henrylle Maia
+---
 
 ## 👨‍💻 Autor
 
 **Junior Fernandes**
+
+-   LinkedIn: [linkedin.com/in/junior-fernandes-dev](https://www.linkedin.com/in/junior-fernandes65/)
+-   GitHub: [github.com/JuniorFernandes](https://github.com/crfjunior65/)
+-   Protifolio: [www.junior.tec.br](https://www.junior.tec.br/)
+
+---
