@@ -1,0 +1,10 @@
+data.terraform_remote_state.vpc
+aws_security_group.bia-alb
+aws_security_group.bia-build
+aws_security_group.bia-db
+aws_security_group.bia-dev
+aws_security_group.bia-dev-mssql
+aws_security_group.bia-ec2
+aws_security_group.bia-web
+aws_security_group.mssql-db
+aws_security_group.windows_sg

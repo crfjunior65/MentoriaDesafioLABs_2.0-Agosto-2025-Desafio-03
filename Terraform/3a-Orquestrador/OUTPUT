@@ -1,0 +1,6 @@
+bastion_instance_id = "i-081c81c07c7b4f165"
+bastion_private_ip = "10.12.101.226"
+bastion_public_ip = "98.81.169.209"
+bastion_sg_ids = toset([
+  "sg-0f78ca8501386ba81",
+])

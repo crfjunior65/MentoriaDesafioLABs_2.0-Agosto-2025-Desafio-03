@@ -1,0 +1,89 @@
+aws_ident = "873976612170"
+iam_ec2_s3_role = {
+  "arn" = "arn:aws:iam::873976612170:role/ec2-s3-role"
+  "assume_role_policy" = "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ec2.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}"
+  "create_date" = "2025-08-22T13:52:14Z"
+  "description" = ""
+  "force_detach_policies" = false
+  "id" = "ec2-s3-role"
+  "inline_policy" = toset([])
+  "managed_policy_arns" = toset([
+    "arn:aws:iam::aws:policy/AdministratorAccess",
+  ])
+  "max_session_duration" = 3600
+  "name" = "ec2-s3-role"
+  "name_prefix" = ""
+  "path" = "/"
+  "permissions_boundary" = ""
+  "tags" = tomap({})
+  "tags_all" = tomap({
+    "Environment" = "Projeto-Desafio-03/Formacao_AWS"
+    "Management" = "Terraform"
+    "Owner" = "Junior_Fernandes"
+    "Terraform" = "true"
+  })
+  "unique_id" = "AROA4W7IQYVFNHQSFYH45"
+}
+iam_ecs_atach_role = "ecs-instance-profile"
+iam_instance_profile_ssm_profile_name = {
+  "arn" = "arn:aws:iam::873976612170:instance-profile/ec2-ssm-profile"
+  "create_date" = "2025-08-22T13:52:15Z"
+  "id" = "ec2-ssm-profile"
+  "name" = "ec2-ssm-profile"
+  "name_prefix" = ""
+  "path" = "/"
+  "role" = "ec2-ssm-role"
+  "tags" = tomap({})
+  "tags_all" = tomap({
+    "Environment" = "Projeto-Desafio-03/Formacao_AWS"
+    "Management" = "Terraform"
+    "Owner" = "Junior_Fernandes"
+    "Terraform" = "true"
+  })
+  "unique_id" = "AIPA4W7IQYVFFCLHDO365"
+}
+iam_s3_atach_role = {
+  "id" = "ec2-s3-role/arn:aws:iam::aws:policy/AdministratorAccess"
+  "policy_arn" = "arn:aws:iam::aws:policy/AdministratorAccess"
+  "role" = "ec2-s3-role"
+}
+iam_s3_profile = {
+  "arn" = "arn:aws:iam::873976612170:instance-profile/ec2-s3-profile"
+  "create_date" = "2025-08-22T13:52:14Z"
+  "id" = "ec2-s3-profile"
+  "name" = "ec2-s3-profile"
+  "name_prefix" = ""
+  "path" = "/"
+  "role" = "ec2-s3-role"
+  "tags" = tomap({})
+  "tags_all" = tomap({
+    "Environment" = "Projeto-Desafio-03/Formacao_AWS"
+    "Management" = "Terraform"
+    "Owner" = "Junior_Fernandes"
+    "Terraform" = "true"
+  })
+  "unique_id" = "AIPA4W7IQYVFHD5NPJUA3"
+}
+iam_ssm_profile = {
+  "arn" = "arn:aws:iam::873976612170:instance-profile/ec2-ssm-profile"
+  "create_date" = "2025-08-22T13:52:15Z"
+  "id" = "ec2-ssm-profile"
+  "name" = "ec2-ssm-profile"
+  "name_prefix" = ""
+  "path" = "/"
+  "role" = "ec2-ssm-role"
+  "tags" = tomap({})
+  "tags_all" = tomap({
+    "Environment" = "Projeto-Desafio-03/Formacao_AWS"
+    "Management" = "Terraform"
+    "Owner" = "Junior_Fernandes"
+    "Terraform" = "true"
+  })
+  "unique_id" = "AIPA4W7IQYVFFCLHDO365"
+}
+ssm_atach_role = {
+  "id" = "ec2-ssm-role/arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  "policy_arn" = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  "role" = "ec2-ssm-role"
+}
+ssm_role = "ec2-ssm-role"

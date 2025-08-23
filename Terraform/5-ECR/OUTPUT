@@ -1,0 +1,11 @@
+ecr_repository_arn = "arn:aws:ecr:us-east-1:873976612170:repository/bia"
+ecr_repository_id = "bia"
+ecr_repository_name = "bia"
+ecr_repository_registry_id = "873976612170"
+ecr_repository_tags_all = tomap({
+  "Environment" = "Desafio-03-Formacao-AWS-bia"
+  "Management" = "Terraform"
+  "RegiaoCriada" = "us-east-1"
+  "Terraform" = "true"
+})
+ecr_repository_url = "873976612170.dkr.ecr.us-east-1.amazonaws.com/bia"

@@ -1,0 +1,12 @@
+data.aws_ami.amazon_linux2
+data.aws_ami.amazon_linux_2023
+data.aws_ami.amazon_linux_2023_sa-1
+data.aws_ami.ubuntu_linux
+data.aws_ami.ubuntu_linux_2204
+data.aws_ami.windows_server_2022
+data.terraform_remote_state.iam
+data.terraform_remote_state.sg
+data.terraform_remote_state.vpc
+aws_instance.ec2_bastionhost
+aws_key_pair.deployer
+aws_key_pair.deployer_sa-1

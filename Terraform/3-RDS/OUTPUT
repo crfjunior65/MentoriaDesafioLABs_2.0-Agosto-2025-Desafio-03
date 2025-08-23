@@ -1,0 +1,10 @@
+db_arn = "arn:aws:rds:us-east-1:873976612170:db:bia"
+db_db_address = "bia.cybw0osiizjg.us-east-1.rds.amazonaws.com"
+db_db_engine = "postgres"
+db_db_id = "db-JXAWNTF2H66V4RAGOZBQZTORPA"
+db_db_identifier = "bia"
+db_db_name = "bia"
+db_db_password = <sensitive>
+db_db_port = 5432
+db_db_username = "postgres"
+db_end_point = "bia.cybw0osiizjg.us-east-1.rds.amazonaws.com:5432"

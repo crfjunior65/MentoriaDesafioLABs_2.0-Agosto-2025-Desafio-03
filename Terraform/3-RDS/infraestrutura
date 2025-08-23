@@ -1,0 +1,6 @@
+data.terraform_remote_state.sg
+data.terraform_remote_state.vpc
+aws_db_instance.db-Projeto
+aws_secretsmanager_secret.db_password_secret
+aws_secretsmanager_secret_version.db_password_secret_version
+random_password.db_master_password
