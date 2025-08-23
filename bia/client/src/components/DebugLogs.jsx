@@ -28,7 +28,7 @@ const DebugLogs = () => {
   return (
     <div className="debug-logs">
       <div className="debug-header">
-        <button 
+        <button
           className="debug-toggle"
           onClick={toggleLogVisibility}
           title={isLogVisible ? "Ocultar logs" : "Mostrar logs"}
@@ -37,9 +37,9 @@ const DebugLogs = () => {
           <span>Debug ({logs.length})</span>
           {isLogVisible ? <FaChevronUp /> : <FaChevronDown />}
         </button>
-        
+
         {isLogVisible && (
-          <button 
+          <button
             className="debug-clear"
             onClick={clearLogs}
             title="Limpar logs"
@@ -56,7 +56,7 @@ const DebugLogs = () => {
             <p>Esta área mostra logs da API para facilitar o debug durante o desenvolvimento.</p>
             <p><strong>URL da API:</strong> {import.meta.env.VITE_API_URL || "http://localhost:8080"}</p>
           </div>
-          
+
           <div className="logs-container">
             {logs.length === 0 ? (
               <div className="no-logs">
@@ -86,4 +86,4 @@ const DebugLogs = () => {
   );
 };
 
-export default DebugLogs; 
+export default DebugLogs;

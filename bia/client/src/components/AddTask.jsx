@@ -15,10 +15,10 @@ const AddTask = ({ onAdd }) => {
       return;
     }
 
-    onAdd({ 
-      titulo: titulo.trim(), 
-      dia_atividade: dia || new Date().toLocaleDateString('pt-BR'), 
-      importante 
+    onAdd({
+      titulo: titulo.trim(),
+      dia_atividade: dia || new Date().toLocaleDateString('pt-BR'),
+      importante
     });
 
     setTitulo("");
@@ -37,7 +37,7 @@ const AddTask = ({ onAdd }) => {
           onChange={(e) => setTitulo(e.target.value)}
         />
       </div>
-      
+
       <div className="form-control">
         <label>Data/Prazo</label>
         <input
@@ -47,7 +47,7 @@ const AddTask = ({ onAdd }) => {
           onChange={(e) => setDia(e.target.value)}
         />
       </div>
-      
+
       <div className="form-control-check">
         <input
           type="checkbox"
@@ -57,11 +57,11 @@ const AddTask = ({ onAdd }) => {
         />
         <label htmlFor="importante">Importante</label>
       </div>
-      
+
       <button type="submit" className="btn btn-block success">
         Add New Task
       </button>
-      
+
       <Modal
         isOpen={showModal}
         onClose={() => setShowModal(false)}

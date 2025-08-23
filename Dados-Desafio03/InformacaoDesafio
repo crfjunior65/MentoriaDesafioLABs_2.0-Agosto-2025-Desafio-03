@@ -3,16 +3,16 @@ Desafio 03
 
 SERVIÇO DESAFIO:	Terraform + ECS + ALB+ RDS
 OBJETIVO:	Lançar a BIA com Terraform rodando no ECS usando modelo sem ALB e com ALB + Domínio com https.
-Observação:	Você precisa fazer o desafio 2 antes desse. Etapa não-linear: 
-            Falta listener para a porta 443 no ALB (Veja com atenção o que é feito nessa etapa 
+Observação:	Você precisa fazer o desafio 2 antes desse. Etapa não-linear:
+            Falta listener para a porta 443 no ALB (Veja com atenção o que é feito nessa etapa
             no dia 3 do evento Imersão AWS & IA). ACM e Route 53 NÃO PRECISA ser com Terraform.
 
 
 Modelo de Postagem no LinkEdin:
-            Foi pra conta mais um Desafio incrível da Mentoria da Formação AWS com Henrylle Maia. 
-            Durante o Bootcamp Imersão AWS nós lançamos um ambiente inteiro na AWS com alta disponibilidade 
-            e todos os recursos necessários. Agora chegou o grande momento de construir todo esse ambiente             
-            usando IAC com Terraform. Após um terraform apply lançamos todas as dependências necessárias 
-            e construímos todos os recursos, desde a máquina de trabalho para apoiar nossas ações na nuvem, 
-            até o cluster inteiro conectado com ALB, repositório no ECR, RDS com secrets, security groups 
+            Foi pra conta mais um Desafio incrível da Mentoria da Formação AWS com Henrylle Maia.
+            Durante o Bootcamp Imersão AWS nós lançamos um ambiente inteiro na AWS com alta disponibilidade
+            e todos os recursos necessários. Agora chegou o grande momento de construir todo esse ambiente
+            usando IAC com Terraform. Após um terraform apply lançamos todas as dependências necessárias
+            e construímos todos os recursos, desde a máquina de trabalho para apoiar nossas ações na nuvem,
+            até o cluster inteiro conectado com ALB, repositório no ECR, RDS com secrets, security groups
             e muito mais. Experiência rica e amadurece muito meu entendimento do uso de Terraform com AWS.

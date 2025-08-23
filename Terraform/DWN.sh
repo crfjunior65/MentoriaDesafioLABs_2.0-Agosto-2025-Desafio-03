@@ -57,8 +57,8 @@ cd ..
 
 cd 3-RDS
 pwd
-terraform destroy -auto-approve
-rm -rf .terraform*
+###terraform destroy -auto-approve
+###rm -rf .terraform*
 cd ..
 
 cd 3a-Orquestrador
@@ -79,19 +79,18 @@ cd ..
 
 cd 1b-IAM
 pwd
-terraform destroy -auto-approve
-rm -rf .terraform*
+###terraform destroy -auto-approve
+###rm -rf .terraform*
 cd ..
 
 cd 1a-SegGroup
 pwd
-terraform destroy -auto-approve
-rm -rf .terraform*
+###terraform destroy -auto-approve
+###rm -rf .terraform*
 cd ..
 
 cd 1-VPC
 pwd
-terraform destroy -auto-approve
-rm -rf .terraform*
+###terraform destroy -auto-approve
+###rm -rf .terraform*
 cd ..
-

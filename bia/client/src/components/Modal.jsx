@@ -49,4 +49,4 @@ const Modal = ({ isOpen, onClose, title, message, type = 'info' }) => {
   );
 };
 
-export default Modal; 
+export default Modal;

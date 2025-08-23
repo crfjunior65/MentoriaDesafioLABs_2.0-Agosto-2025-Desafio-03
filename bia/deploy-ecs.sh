@@ -3,7 +3,7 @@
 # Script de Deploy ECS - Projeto BIA
 # Autor: Amazon Q
 # Versão: 1.0.0
-# 
+#
 # Este script automatiza o processo de build e deploy para ECS
 # com versionamento baseado em commit hash para facilitar rollbacks
 
@@ -111,7 +111,7 @@ ecr_login() {
 check_ecr_repo() {
     local region=$1
     local repo_name=$2
-    
+
     log_info "Verificando repositório ECR: $repo_name"
     if ! aws ecr describe-repositories --repository-names $repo_name --region $region > /dev/null 2>&1; then
         log_error "Repositório ECR '$repo_name' não encontrado na região '$region'"
@@ -124,13 +124,13 @@ check_ecr_repo() {
 build_image() {
     local tag=$1
     local ecr_uri=$2
-    
+
     log_info "Fazendo build da imagem Docker..."
     log_info "Tag: $tag"
-    
+
     # Build com múltiplas tags
     docker build -t bia-app:$tag -t bia-app:latest -t $ecr_uri:$tag -t $ecr_uri:latest .
-    
+
     log_success "Build concluído com sucesso"
 }
 
@@ -138,11 +138,11 @@ build_image() {
 push_image() {
     local tag=$1
     local ecr_uri=$2
-    
+
     log_info "Fazendo push da imagem para ECR..."
     docker push $ecr_uri:$tag
     docker push $ecr_uri:latest
-    
+
     log_success "Push concluído com sucesso"
 }
 
@@ -152,42 +152,42 @@ create_task_definition() {
     local task_family=$2
     local ecr_uri=$3
     local tag=$4
-    
+
     log_info "Criando nova task definition..."
-    
+
     # Obter a task definition atual
     local current_task_def=$(aws ecs describe-task-definition --task-definition $task_family --region $region --query 'taskDefinition' --output json)
-    
+
     if [ $? -ne 0 ]; then
         log_error "Não foi possível obter a task definition atual: $task_family"
         exit 1
     fi
-    
+
     # Salvar em arquivo temporário para melhor manipulação
     local temp_file=$(mktemp)
     echo "$current_task_def" > "$temp_file"
-    
+
     # Criar nova task definition com a nova imagem
     local new_task_def=$(jq --arg image "$ecr_uri:$tag" '
         .containerDefinitions[0].image = $image |
         del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .placementConstraints, .compatibilities, .registeredAt, .registeredBy)
     ' "$temp_file")
-    
+
     # Salvar nova task definition em arquivo temporário
     local new_temp_file=$(mktemp)
     echo "$new_task_def" > "$new_temp_file"
-    
+
     # Registrar nova task definition
     local new_revision=$(aws ecs register-task-definition --region $region --cli-input-json file://"$new_temp_file" --query 'taskDefinition.revision' --output text)
-    
+
     # Limpar arquivos temporários
     rm -f "$temp_file" "$new_temp_file"
-    
+
     if [ $? -ne 0 ]; then
         log_error "Falha ao registrar nova task definition"
         exit 1
     fi
-    
+
     log_success "Nova task definition criada: $task_family:$new_revision"
     echo $new_revision
 }
@@ -199,26 +199,26 @@ update_service() {
     local service=$3
     local task_family=$4
     local revision=$5
-    
+
     log_info "Atualizando serviço ECS..."
     log_info "Task Definition: $task_family:$revision"
-    
+
     aws ecs update-service \
         --region $region \
         --cluster $cluster \
         --service $service \
         --task-definition $task_family:$revision > /dev/null
-    
+
     if [ $? -ne 0 ]; then
         log_error "Falha ao atualizar o serviço ECS"
         exit 1
     fi
-    
+
     log_success "Serviço atualizado com sucesso"
     log_info "Aguardando estabilização do serviço..."
-    
+
     aws ecs wait services-stable --region $region --cluster $cluster --services $service
-    
+
     log_success "Deploy concluído com sucesso!"
 }
 
@@ -226,9 +226,9 @@ update_service() {
 list_versions() {
     local region=$1
     local repo_name=$2
-    
+
     log_info "Listando versões disponíveis no ECR..."
-    
+
     aws ecr describe-images \
         --repository-name $repo_name \
         --region $region \
@@ -243,39 +243,39 @@ deploy() {
     local cluster=$3
     local service=$4
     local task_family=$5
-    
+
     # Obter informações necessárias
     local commit_hash=$(get_commit_hash)
     local account_id=$(aws sts get-caller-identity --query Account --output text)
     local ecr_uri="$account_id.dkr.ecr.$region.amazonaws.com/$ecr_repo"
-    
+
     log_info "Iniciando deploy..."
     log_info "Commit Hash: $commit_hash"
     log_info "ECR URI: $ecr_uri"
-    
+
     # Verificar se o repositório ECR existe
     check_ecr_repo $region $ecr_repo
-    
+
     # Login no ECR
     ecr_login $region
-    
+
     # Build da imagem
     build_image $commit_hash $ecr_uri
-    
+
     # Push da imagem
     push_image $commit_hash $ecr_uri
-    
+
     # Criar nova task definition
     local new_revision=$(create_task_definition $region $task_family $ecr_uri $commit_hash)
-    
+
     if [ -z "$new_revision" ]; then
         log_error "Falha ao obter revision da nova task definition"
         exit 1
     fi
-    
+
     # Atualizar serviço
     update_service $region $cluster $service $task_family $new_revision
-    
+
     log_success "Deploy concluído!"
     log_info "Versão deployada: $commit_hash"
     log_info "Task Definition: $task_family:$new_revision"
@@ -289,29 +289,29 @@ rollback() {
     local service=$4
     local task_family=$5
     local target_tag=$6
-    
+
     if [ -z "$target_tag" ]; then
         log_error "Tag para rollback não especificada. Use -t ou --tag"
         exit 1
     fi
-    
+
     local account_id=$(aws sts get-caller-identity --query Account --output text)
     local ecr_uri="$account_id.dkr.ecr.$region.amazonaws.com/$ecr_repo"
-    
+
     log_info "Iniciando rollback para versão: $target_tag"
-    
+
     # Verificar se a imagem existe
     if ! aws ecr describe-images --repository-name $ecr_repo --region $region --image-ids imageTag=$target_tag > /dev/null 2>&1; then
         log_error "Imagem com tag '$target_tag' não encontrada no ECR"
         exit 1
     fi
-    
+
     # Criar nova task definition com a imagem de rollback
     local new_revision=$(create_task_definition $region $task_family $ecr_uri $target_tag)
-    
+
     # Atualizar serviço
     update_service $region $cluster $service $task_family $new_revision
-    
+
     log_success "Rollback concluído!"
     log_info "Versão atual: $target_tag"
     log_info "Task Definition: $task_family:$new_revision"

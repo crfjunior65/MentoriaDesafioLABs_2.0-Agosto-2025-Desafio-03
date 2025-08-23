@@ -8,7 +8,7 @@ const getConfig = require("../../config/database.js");
 
 const db = {};
 
-const initializeModels = async () => {  
+const initializeModels = async () => {
   const resolvedConfig = await getConfig();
   const sequelize = new Sequelize(resolvedConfig);
   try {

@@ -1,9 +1,9 @@
 # Projeto BIA - Contexto e Análise
 
 ## Visão Geral do Projeto
-**Nome:** BIA  
-**Versão:** 3.2.0  
-**Período do Bootcamp:** 28/07 a 03/08/2025 (Online e ao Vivo às 20h)  
+**Nome:** BIA
+**Versão:** 3.2.0
+**Período do Bootcamp:** 28/07 a 03/08/2025 (Online e ao Vivo às 20h)
 **Repositório:** https://github.com/henrylle/bia
 
 ## Impressões Iniciais do Desenvolvedor

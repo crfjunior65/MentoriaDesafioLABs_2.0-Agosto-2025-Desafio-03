@@ -6,13 +6,13 @@ echo "=== Deploy ECS Infrastructure ==="
 deploy_module() {
     local module_path=$1
     local module_name=$2
-    
+
     echo "Deploying $module_name..."
     cd "$module_path" || exit 1
-    
+
     terraform init
     terraform plan -out=plan.out
-    
+
     read -p "Apply $module_name? (y/N): " confirm
     if [[ $confirm == [yY] ]]; then
         terraform apply plan.out
@@ -20,7 +20,7 @@ deploy_module() {
     else
         echo "Skipping $module_name deployment"
     fi
-    
+
     cd - > /dev/null
 }
 

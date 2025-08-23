@@ -33,17 +33,17 @@ function AppContent() {
   const fetchTasks = async () => {
     const url = `${apiUrl}/api/tarefas`;
     logApiRequest('GET', url);
-    
+
     try {
       const res = await fetch(url);
       const data = await res.json();
-      
+
       logApiResponse('GET', url, res.status, data);
-      
+
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
-      
+
       return data;
     } catch (error) {
       logApiError('GET', url, error);
@@ -55,17 +55,17 @@ function AppContent() {
   const fetchTask = async (uuid) => {
     const url = `${apiUrl}/api/tarefas/${uuid}`;
     logApiRequest('GET', url);
-    
+
     try {
       const res = await fetch(url);
       const data = await res.json();
-      
+
       logApiResponse('GET', url, res.status, data);
-      
+
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
-      
+
       return data;
     } catch (error) {
       logApiError('GET', url, error);
@@ -92,21 +92,21 @@ function AppContent() {
         },
         body: JSON.stringify(updatedTask),
       });
-      
+
       const data = await res.json();
-      
+
       logApiResponse('PUT', url, res.status, data);
-      
+
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
-      
+
       setTasks(
         tasks.map((task) =>
           task.uuid === uuid ? { ...task, importante: data.importante } : task
         )
       );
-      
+
       addLog('SUCCESS', 'Prioridade alterada', `Tarefa ${uuid} - Importante: ${data.importante}`);
     } catch (error) {
       addLog('ERROR', 'Falha ao alterar prioridade', error.message);
@@ -117,7 +117,7 @@ function AppContent() {
   const addTask = async (task) => {
     const url = `${apiUrl}/api/tarefas`;
     logApiRequest('POST', url, task);
-    
+
     try {
       const res = await fetch(url, {
         method: "POST",
@@ -126,15 +126,15 @@ function AppContent() {
         },
         body: JSON.stringify(task),
       });
-      
+
       const data = await res.json();
-      
+
       logApiResponse('POST', url, res.status, data);
-      
+
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
-      
+
       setTasks([...tasks, data]);
       addLog('SUCCESS', 'Tarefa criada', `"${task.titulo}" adicionada com sucesso`);
     } catch (error) {
@@ -147,18 +147,18 @@ function AppContent() {
   const deleteTask = async (uuid) => {
     const url = `${apiUrl}/api/tarefas/${uuid}`;
     logApiRequest('DELETE', url);
-    
+
     try {
       const res = await fetch(url, {
         method: "DELETE",
       });
-      
+
       logApiResponse('DELETE', url, res.status);
-      
+
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
-      
+
       setTasks(tasks.filter((task) => task.uuid !== uuid));
       addLog('SUCCESS', 'Tarefa removida', `Tarefa ${uuid} excluída com sucesso`);
     } catch (error) {

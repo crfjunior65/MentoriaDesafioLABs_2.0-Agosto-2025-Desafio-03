@@ -9,7 +9,7 @@ const Tasks = ({ tasks, onDelete, onToggle }) => {
   const indexOfLastTask = currentPage * tasksPerPage;
   const indexOfFirstTask = indexOfLastTask - tasksPerPage;
   const currentTasks = tasks.slice(indexOfFirstTask, indexOfLastTask);
-  
+
   // Calcular total de páginas
   const totalPages = Math.ceil(tasks.length / tasksPerPage);
 
@@ -64,9 +64,9 @@ const Tasks = ({ tasks, onDelete, onToggle }) => {
               Mostrando {indexOfFirstTask + 1}-{Math.min(indexOfLastTask, tasks.length)} de {tasks.length} tarefas
             </span>
           </div>
-          
+
           <div className="pagination-controls">
-            <button 
+            <button
               className="pagination-btn"
               onClick={goToPrevious}
               disabled={currentPage === 1}
@@ -74,11 +74,11 @@ const Tasks = ({ tasks, onDelete, onToggle }) => {
             >
               ‹
             </button>
-            
+
             {/* Números das páginas */}
             {Array.from({ length: totalPages }, (_, index) => {
               const pageNumber = index + 1;
-              
+
               // Mostrar sempre primeira, última e páginas próximas da atual
               if (
                 pageNumber === 1 ||
@@ -95,7 +95,7 @@ const Tasks = ({ tasks, onDelete, onToggle }) => {
                   </button>
                 );
               }
-              
+
               // Mostrar reticências
               if (
                 pageNumber === currentPage - 2 ||
@@ -103,11 +103,11 @@ const Tasks = ({ tasks, onDelete, onToggle }) => {
               ) {
                 return <span key={pageNumber} className="pagination-dots">...</span>;
               }
-              
+
               return null;
             })}
-            
-            <button 
+
+            <button
               className="pagination-btn"
               onClick={goToNext}
               disabled={currentPage === totalPages}

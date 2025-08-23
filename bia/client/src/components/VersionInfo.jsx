@@ -10,12 +10,12 @@ const VersionInfo = () => {
     if (import.meta.env.VITE_API_URL) {
       return import.meta.env.VITE_API_URL;
     }
-    
+
     // Se estiver rodando no mesmo domínio (produção integrada)
     if (window.location.port === '8080') {
       return window.location.origin;
     }
-    
+
     // Desenvolvimento local - inferir porta 8080
     return 'http://localhost:8080';
   };
@@ -26,15 +26,15 @@ const VersionInfo = () => {
       const apiUrl = getApiUrl();
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
-      
+
       const response = await fetch(`${apiUrl}/api/versao`, {
         signal: controller.signal,
         method: 'GET',
         cache: 'no-cache'
       });
-      
+
       clearTimeout(timeoutId);
-      
+
       if (response.ok) {
         const versionText = await response.text();
         setApiVersion(versionText);
@@ -88,7 +88,7 @@ const VersionInfo = () => {
 
   const getEnvironmentInfo = () => {
     const { protocol, hostname, port } = window.location;
-    
+
     // Detectar tipo de ambiente
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       return {
@@ -99,7 +99,7 @@ const VersionInfo = () => {
         color: '#3b82f6' // azul
       };
     }
-    
+
     // IP direto sem HTTPS
     if (/^\d+\.\d+\.\d+\.\d+$/.test(hostname) && protocol === 'http:') {
       return {
@@ -110,7 +110,7 @@ const VersionInfo = () => {
         color: '#f59e0b' // amarelo/laranja
       };
     }
-    
+
     // ALB/Load Balancer sem HTTPS
     if (protocol === 'http:' && hostname.includes('.elb.')) {
       return {
@@ -121,7 +121,7 @@ const VersionInfo = () => {
         color: '#ef4444' // vermelho
       };
     }
-    
+
     // Domínio com HTTPS (produção)
     if (protocol === 'https:') {
       return {
@@ -132,7 +132,7 @@ const VersionInfo = () => {
         color: '#22c55e' // verde
       };
     }
-    
+
     // Outros casos
     return {
       type: 'other',
@@ -145,13 +145,13 @@ const VersionInfo = () => {
 
   return (
     <div className="version-info">
-      <button 
+      <button
         className={`version-trigger ${apiStatus} ${getEnvironmentInfo().type}`}
         onClick={handleVersionClick}
         title={`${getEnvironmentInfo().icon} ${getEnvironmentInfo().label} | API: ${getStatusText()}`}
         style={{
-          borderColor: apiStatus === 'online' ? getEnvironmentInfo().color : 
-                      apiStatus === 'offline' ? '#ef4444' : 
+          borderColor: apiStatus === 'online' ? getEnvironmentInfo().color :
+                      apiStatus === 'offline' ? '#ef4444' :
                       '#f59e0b'
         }}
       >
@@ -167,8 +167,8 @@ const VersionInfo = () => {
                  Status: {getStatusText()}
                </small>
                <small>
-                 <span 
-                   className="env-indicator" 
+                 <span
+                   className="env-indicator"
                    style={{ color: getEnvironmentInfo().color }}
                  >
                    {getEnvironmentInfo().icon}
@@ -178,8 +178,8 @@ const VersionInfo = () => {
                <small>Local: {getEnvironmentInfo().description}</small>
                <small>API: {getApiUrl()}</small>
                <small>
-                 <button 
-                   className="version-link" 
+                 <button
+                   className="version-link"
                    onClick={openVersionEndpoint}
                    title="Abrir endpoint de versão"
                  >
@@ -187,8 +187,8 @@ const VersionInfo = () => {
                  </button>
                </small>
                <small>
-                 <button 
-                   className="version-link refresh-btn" 
+                 <button
+                   className="version-link refresh-btn"
                    onClick={checkApiHealth}
                    title="Verificar status da API"
                    disabled={apiStatus === 'checking'}
@@ -204,4 +204,4 @@ const VersionInfo = () => {
   );
 };
 
-export default VersionInfo; 
+export default VersionInfo;

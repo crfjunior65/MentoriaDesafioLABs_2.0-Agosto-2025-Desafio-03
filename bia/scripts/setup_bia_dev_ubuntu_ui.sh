@@ -36,5 +36,3 @@ sudo npm install -g npm@latest --loglevel=error
 # Configurando permissão no docker para não ter que ficar usando root
 sudo usermod -aG docker ubuntu
 newgrp docker
-
-

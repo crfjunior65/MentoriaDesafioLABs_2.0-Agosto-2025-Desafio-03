@@ -9,6 +9,17 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
+data "terraform_remote_state" "iam" {
+  backend = "s3"
+  config = {
+    bucket  = "crfjunior-tf-state-bia"
+    key     = "iam/terraform.tfstate"
+    profile = "DesafioAWS" # Use your AWS profile if needed
+    region  = "us-east-1"
+  }
+}
+
+
 data "terraform_remote_state" "orquestrador" {
   backend = "s3"
   config = {

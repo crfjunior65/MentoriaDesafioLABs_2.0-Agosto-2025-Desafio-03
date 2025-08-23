@@ -12,7 +12,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -21,31 +21,31 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-        
+
         .header {
             background: linear-gradient(135deg, #FF9500 0%, #FF6B35 100%);
             color: white;
             padding: 30px;
             text-align: center;
         }
-        
+
         .header h1 {
             margin: 0;
             font-size: 2.5em;
             font-weight: 300;
         }
-        
+
         .header p {
             margin: 10px 0 0 0;
             opacity: 0.9;
             font-size: 1.1em;
         }
-        
+
         .architecture-diagram {
             padding: 40px;
             background: #f8f9fa;
         }
-        
+
         .aws-region {
             border: 3px dashed #FF9500;
             border-radius: 15px;
@@ -54,7 +54,7 @@
             background: white;
             position: relative;
         }
-        
+
         .region-label {
             position: absolute;
             top: -15px;
@@ -66,7 +66,7 @@
             font-weight: bold;
             font-size: 0.9em;
         }
-        
+
         .vpc {
             border: 2px solid #4CAF50;
             border-radius: 10px;
@@ -75,7 +75,7 @@
             background: #f0f8f0;
             position: relative;
         }
-        
+
         .vpc-label {
             position: absolute;
             top: -12px;
@@ -87,14 +87,14 @@
             font-size: 0.8em;
             font-weight: bold;
         }
-        
+
         .subnet-row {
             display: flex;
             gap: 20px;
             margin: 20px 0;
             flex-wrap: wrap;
         }
-        
+
         .subnet {
             flex: 1;
             min-width: 300px;
@@ -104,7 +104,7 @@
             background: #e3f2fd;
             position: relative;
         }
-        
+
         .subnet-label {
             position: absolute;
             top: -12px;
@@ -116,7 +116,7 @@
             font-size: 0.75em;
             font-weight: bold;
         }
-        
+
         .service-box {
             background: white;
             border-radius: 8px;
@@ -126,12 +126,12 @@
             border-left: 4px solid #FF6B35;
             transition: transform 0.2s;
         }
-        
+
         .service-box:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
-        
+
         .service-title {
             font-weight: bold;
             color: #333;
@@ -140,7 +140,7 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .service-icon {
             width: 24px;
             height: 24px;
@@ -153,20 +153,20 @@
             font-size: 12px;
             font-weight: bold;
         }
-        
+
         .service-description {
             color: #666;
             font-size: 0.9em;
             line-height: 1.4;
         }
-        
+
         .external-services {
             display: flex;
             gap: 20px;
             margin: 30px 0;
             flex-wrap: wrap;
         }
-        
+
         .external-service {
             flex: 1;
             min-width: 250px;
@@ -176,32 +176,32 @@
             padding: 20px;
             text-align: center;
         }
-        
+
         .flow-arrows {
             text-align: center;
             margin: 20px 0;
             color: #666;
             font-size: 1.2em;
         }
-        
+
         .tech-stack {
             background: #f5f5f5;
             padding: 30px;
             margin-top: 20px;
         }
-        
+
         .tech-stack h3 {
             color: #333;
             margin-bottom: 20px;
             text-align: center;
         }
-        
+
         .tech-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
         }
-        
+
         .tech-item {
             background: white;
             padding: 15px;
@@ -209,53 +209,53 @@
             text-align: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        
+
         .tech-category {
             font-weight: bold;
             color: #FF6B35;
             margin-bottom: 8px;
         }
-        
+
         .benefits {
             background: #e8f5e8;
             padding: 30px;
             margin-top: 20px;
         }
-        
+
         .benefits h3 {
             color: #2e7d32;
             margin-bottom: 20px;
             text-align: center;
         }
-        
+
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 15px;
         }
-        
+
         .benefit-item {
             background: white;
             padding: 15px;
             border-radius: 8px;
             border-left: 4px solid #4CAF50;
         }
-        
+
         .benefit-title {
             font-weight: bold;
             color: #2e7d32;
             margin-bottom: 5px;
         }
-        
+
         @media (max-width: 768px) {
             .subnet-row {
                 flex-direction: column;
             }
-            
+
             .external-services {
                 flex-direction: column;
             }
-            
+
             .header h1 {
                 font-size: 2em;
             }
@@ -268,7 +268,7 @@
             <h1>🏗️ Arquitetura AWS - Projeto BIA</h1>
             <p>ECS com EC2 + RDS PostgreSQL + CodePipeline</p>
         </div>
-        
+
         <div class="architecture-diagram">
             <!-- Serviços Externos -->
             <div class="external-services">
@@ -282,7 +282,7 @@
                         Interface React (Vite)
                     </div>
                 </div>
-                
+
                 <div class="external-service">
                     <div class="service-title">
                         <div class="service-icon">🔧</div>
@@ -294,13 +294,13 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="flow-arrows">⬇️ HTTPS / Git Webhook ⬇️</div>
-            
+
             <!-- AWS Region -->
             <div class="aws-region">
                 <div class="region-label">AWS Region (us-east-1)</div>
-                
+
                 <!-- Application Load Balancer -->
                 <div class="service-box">
                     <div class="service-title">
@@ -314,18 +314,18 @@
                         • Target Groups para containers
                     </div>
                 </div>
-                
+
                 <div class="flow-arrows">⬇️ Distribui tráfego ⬇️</div>
-                
+
                 <!-- VPC -->
                 <div class="vpc">
                     <div class="vpc-label">VPC (10.0.0.0/16)</div>
-                    
+
                     <!-- Public Subnets -->
                     <div class="subnet-row">
                         <div class="subnet">
                             <div class="subnet-label">Public Subnet A (10.0.1.0/24)</div>
-                            
+
                             <div class="service-box">
                                 <div class="service-title">
                                     <div class="service-icon">🌐</div>
@@ -336,10 +336,10 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="subnet">
                             <div class="subnet-label">Public Subnet B (10.0.2.0/24)</div>
-                            
+
                             <div class="service-box">
                                 <div class="service-title">
                                     <div class="service-icon">🌐</div>
@@ -351,12 +351,12 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Private Subnets -->
                     <div class="subnet-row">
                         <div class="subnet">
                             <div class="subnet-label">Private Subnet A (10.0.3.0/24)</div>
-                            
+
                             <div class="service-box">
                                 <div class="service-title">
                                     <div class="service-icon">🐳</div>
@@ -369,7 +369,7 @@
                                     • Container BIA (Node.js + React)
                                 </div>
                             </div>
-                            
+
                             <div class="service-box">
                                 <div class="service-title">
                                     <div class="service-icon">📊</div>
@@ -380,10 +380,10 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="subnet">
                             <div class="subnet-label">Private Subnet B (10.0.4.0/24)</div>
-                            
+
                             <div class="service-box">
                                 <div class="service-title">
                                     <div class="service-icon">🐳</div>
@@ -395,7 +395,7 @@
                                     • Load balancing automático
                                 </div>
                             </div>
-                            
+
                             <div class="service-box">
                                 <div class="service-title">
                                     <div class="service-icon">🔐</div>
@@ -407,12 +407,12 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Database Subnets -->
                     <div class="subnet-row">
                         <div class="subnet">
                             <div class="subnet-label">DB Subnet A (10.0.5.0/24)</div>
-                            
+
                             <div class="service-box">
                                 <div class="service-title">
                                     <div class="service-icon">🗄️</div>
@@ -426,10 +426,10 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="subnet">
                             <div class="subnet-label">DB Subnet B (10.0.6.0/24)</div>
-                            
+
                             <div class="service-box">
                                 <div class="service-title">
                                     <div class="service-icon">🗄️</div>
@@ -444,7 +444,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- CI/CD Pipeline -->
                 <div class="service-box" style="margin-top: 30px;">
                     <div class="service-title">
@@ -460,7 +460,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Tech Stack -->
         <div class="tech-stack">
             <h3>🛠️ Stack Tecnológica Identificada</h3>
@@ -503,7 +503,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Benefits -->
         <div class="benefits">
             <h3>✅ Benefícios desta Arquitetura</h3>

@@ -5,14 +5,14 @@ import VersionInfo from "./VersionInfo";
 
 const Header = ({ title }) => {
   const { isDarkMode, toggleTheme } = useTheme();
-  
+
   return (
     <header className="header">
       <h1>{title}</h1>
       <div className="header-controls">
         <VersionInfo />
-        <button 
-          className="theme-toggle" 
+        <button
+          className="theme-toggle"
           onClick={toggleTheme}
           title={isDarkMode ? "Tema claro" : "Tema escuro"}
         >

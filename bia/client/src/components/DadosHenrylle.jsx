@@ -14,7 +14,7 @@ const DadosHenrylle = () => {
           <h4>💬 Suporte</h4>
           <p>Formação AWS</p>
         </a>
-        
+
         <a
           href="https://instagram.com/henryllemaia"
           target="_blank"
@@ -24,7 +24,7 @@ const DadosHenrylle = () => {
           <h4>📸 Instagram</h4>
           <p>Henrylle Maia</p>
         </a>
-        
+
         <a
           href="https://www.youtube.com/@henryllemaia"
           target="_blank"
@@ -34,7 +34,7 @@ const DadosHenrylle = () => {
           <h4>🎥 YouTube</h4>
           <p>Canal oficial</p>
         </a>
-        
+
         <a
           href="https://www.linkedin.com/in/henrylle/recent-activity/all/"
           target="_blank"

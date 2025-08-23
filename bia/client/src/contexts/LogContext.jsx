@@ -19,7 +19,7 @@ export const LogProvider = ({ children }) => {
     // Verifica se o modo debug está habilitado via environment variable
     const debugEnabled = import.meta.env.VITE_DEBUG_MODE === 'true';
     setDebugMode(debugEnabled);
-    
+
     if (debugEnabled) {
       addLog('INFO', 'Modo debug habilitado', 'Sistema inicializado com logs visíveis');
     }
@@ -36,7 +36,7 @@ export const LogProvider = ({ children }) => {
     };
 
     setLogs(prev => [logEntry, ...prev].slice(0, 50)); // Mantém apenas os 50 logs mais recentes
-    
+
     // Log no console também
     const logMethod = type === 'ERROR' ? 'error' : type === 'WARNING' ? 'warn' : 'log';
     console[logMethod](`[${timestamp}] ${type}: ${message}`, details || '');
@@ -82,4 +82,4 @@ export const LogProvider = ({ children }) => {
       {children}
     </LogContext.Provider>
   );
-}; 
+};

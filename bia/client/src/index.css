@@ -461,21 +461,21 @@ footer {
   .app {
     padding: 0.5rem;
   }
-  
+
   .container {
     border-radius: 0;
     border-left: none;
     border-right: none;
   }
-  
+
   .header {
     padding: 1rem;
   }
-  
+
   .header h1 {
     font-size: 1.25rem;
   }
-  
+
   .links-grid {
     grid-template-columns: 1fr;
   }
@@ -773,12 +773,12 @@ footer {
   .pagination-btn {
     border-width: 2px;
   }
-  
+
   .pagination-btn:not(.active):not(:disabled) {
     background: var(--bg-primary);
     border-color: var(--border-color);
   }
-  
+
   .pagination-btn:active:not(:disabled) {
     background: var(--accent-primary);
     border-color: var(--accent-primary);
@@ -808,11 +808,11 @@ footer {
     padding: 0.75rem 1rem;
     gap: 1rem;
   }
-  
+
   .pagination-controls {
     gap: 0.5rem;
   }
-  
+
   .pagination-btn {
     padding: 0.75rem;
     min-width: 3rem;
@@ -822,7 +822,7 @@ footer {
     /* Área de toque maior para mobile */
     touch-action: manipulation;
   }
-  
+
   /* Botões de navegação (anterior/próximo) maiores no mobile */
   .pagination-btn:first-child,
   .pagination-btn:last-child {
@@ -830,27 +830,27 @@ footer {
     font-size: 1.25rem;
     font-weight: 600;
   }
-  
+
   .pagination-info span {
     font-size: 0.75rem;
   }
-  
+
   /* Esconder números de página no mobile muito pequeno */
   @media (max-width: 480px) {
     .pagination-btn:not(:first-child):not(:last-child):not(.active) {
       display: none;
     }
-    
+
     .pagination-dots {
       display: none;
     }
-    
+
     /* Mostrar apenas página atual entre os botões de navegação */
     .pagination-controls {
       justify-content: space-between;
       padding: 0 0.5rem;
     }
-    
+
     .pagination-btn.active {
       order: 0;
       position: absolute;

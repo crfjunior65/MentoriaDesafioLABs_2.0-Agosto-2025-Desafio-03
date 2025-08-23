@@ -9,6 +9,7 @@ data "aws_iam_policy_document" "instance_assume_role_policy" {
   }
 }
 
+#------------------------------------------------------------------------------
 # Criar o Role IAM para a EC2 com permissões para o SSM ######
 resource "aws_iam_role" "ssm_role" {
   name = "ec2-ssm-role"
@@ -56,15 +57,15 @@ resource "aws_iam_role_policy_attachment" "ec2_container_registry_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
 }
 
-resource "aws_iam_role_policy_attachment" "ssm_managed_policy" {
+resource "aws_iam_role_policy_attachment" "secretmanager_managed_policy" {
   role       = aws_iam_role.ssm_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
 }
 
-resource "aws_iam_role_policy_attachment" "ssm_managed_policy" {
-  role       = aws_iam_role.ssm_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-}
+#resource "aws_iam_role_policy_attachment" "ssm_managed_policy" {
+#  role       = aws_iam_role.ssm_role.name
+#  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+#}
 #------------------------------------------------------------------------------
 
 # Criar um Instance Profile para associar o Role à instância EC2
@@ -72,6 +73,8 @@ resource "aws_iam_instance_profile" "ssm_profile" {
   name = "ec2-ssm-profile"
   role = aws_iam_role.ssm_role.name
 }
+
+#--------------------------------------------------------------------------------
 
 # Criar o Role IAM para a EC2 com permissões para o S3/SSM
 resource "aws_iam_role" "ec2_s3_role" {
@@ -102,6 +105,8 @@ resource "aws_iam_instance_profile" "s3_profile" {
   role = aws_iam_role.ec2_s3_role.name
 }
 
+
+#--------------------------------------------------------------------------------
 resource "aws_iam_role" "ecs_instance_role" {
   name = "ecs-instance-role"
 
@@ -128,10 +133,14 @@ resource "aws_iam_role_policy_attachment" "ecs_instance_cloudwatch_policy" {
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
 }
 
+#------------------------------------------------------------------------------
+
 resource "aws_iam_instance_profile" "ecs_instance_profile" {
   name = "ecs-instance-profile"
   role = aws_iam_role.ecs_instance_role.name
 }
+
+#------------------------------------------------------------------------------
 
 resource "aws_iam_role_policy_attachment" "s3_full" {
   role       = aws_iam_role.ecs_instance_role.name

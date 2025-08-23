@@ -15,7 +15,7 @@ fi
 security_group_id=$(aws ec2 describe-security-groups --group-names "bia-dev" --query "SecurityGroups[0].GroupId" --output text 2>/dev/null)
 if [ $? -eq 0 ]; then
   echo "[OK] Security Group bia-dev foi criado"
-  
+
   # Validar inbound rule para o security group 'bia-dev'
   inbound_rule=$(aws ec2 describe-security-groups --group-ids $security_group_id --filters "Name=ip-permission.from-port,Values=3001" --filters "Name=ip-permission.cidr,Values=0.0.0.0/0" --output text)
 
@@ -27,7 +27,7 @@ if [ $? -eq 0 ]; then
 
   # Validar outbound rule para o security group 'bia-dev'
   outobund_rule=$(aws ec2 describe-security-groups --group-ids $security_group_id --query "SecurityGroups[0].IpPermissionsEgress[?IpProtocol=='-1' && IpRanges[0].CidrIp=='0.0.0.0/0']" --output text)
-  
+
   if [ -n "$outobund_rule" ]; then
     echo " [OK] Regra de saída está correta"
   else

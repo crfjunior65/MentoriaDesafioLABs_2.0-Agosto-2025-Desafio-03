@@ -1,186 +1,89 @@
-# 🚀 Mentoria Desafio LABs 2.0 - Agosto 2025 | Desafio 02
+# 🚀 Projeto BIA - Aplicação Web em AWS ECS com Terraform
 
-**Serviço do Desafio:** Terraform + EC2
-**Objetivo:** Lançar uma máquina de trabalho na nuvem AWS (`bia-dev`) utilizando Terraform com estado remoto, seguindo as melhores práticas de Infrastructure as Code (IaC).
+Este projeto implementa a infraestrutura completa na AWS para hospedar a aplicação conteinerizada "Bia", utilizando Terraform para automação e gerenciamento (Infraestrutura como Código - IaC).
 
-## 📋 Sobre o Projeto
+## 📋 Visão Geral do Projeto
 
-Este projeto é a solução para o segundo desafio da mentoria Labs 2.0, focado em implementar infraestrutura automatizada e reprodutível na AWS usando Terraform. A instância EC2 é provisionada com todas as configurações necessárias, incluindo roles de IAM, security groups e scripts de inicialização via user data. Neese proje implementmo Remote State usando S3(AWS) como backend.
+O objetivo é implantar uma aplicação web full-stack (Node.js + React) de forma automatizada, escalável e segura na AWS. A solução é dividida em duas partes principais:
 
-Subimos uma aplicação Bia 2025 4.2.0, Rodandoem Container(Docker).
+1.  **Infraestrutura (`Terraform/`)**: Código Terraform que provisiona todos os recursos necessários na nuvem, desde a rede até o cluster de contêineres.
+2.  **Aplicação (`bia/`)**: O código-fonte da aplicação, já preparado para ser conteinerizado com Docker.
 
-## 🏗️ Arquitetura
-
-O projeto provisiona os segu recursos na AWS:
-
-- **Amazon EC2 Instance:** Uma instância Amazon Linux para ambiente de desenvolvimento.
-- **Security Group:** Regras de firewall configuradas para permitir acesso SSH (porta 22) e tráfego de saída.
-- **IAM Role & Instance Profile:** Permissões concedidas à instância para interagir com outros serviços AWS de forma segura.
-- **Remote State Backend:** Configuração do estado do Terraform armazenado em um Amazon S3 Bucket (não criado neste código) para enable collaboration and state locking.
-- **VPC Modulo AWS:**
-
-Diagrama simplificado:
-🔍 Estrutura do Projeto
-
-![alt text](<Dados-Desafio02/Captura de tela em 2025-08-20 19-02-51.png>)
-
-## ⚙️ Pré-requisitos
-
-Antes de utilizar este projeto, certifique-se de ter instalado e configurado:
-
-- **Terraform** (> v1.0)
-- **AWS CLI** configurado com credenciais válidas e permissões adequadas
-- **Conta AWS** com acesso para criar recursos EC2, IAM e S3
-
-## 🚀 Como Usar
-
-### 1. Clone o Repositório
-
-```bash
-git clone https://github.com/crfjunior65/MentoriaDesafioLABs_2.0-Agosto-2025-Desafio-02.git
-cd MentoriaDesafioLABs_2.0-Agosto-2025-Desafio-02
-Na pasta Terraform(cd Terraform)
-
-**Procedimentos Terraform:**
-### 2. Inicialize o Terraform
-```bash
-terraform init
-
-### 3. Realise o Plano de Execução
-```bash
-terraform plan -out plan.out
-
-### 4. Aplique as Configurações
-```bash
-terraform apply "plan.out"
-
-### 5. Acesse a Instância EC2
-```bash
-ssh -i "sua-chave.pem" ec2-user@<IP_DA_INSTANCIA>
-```
-### 🚀 Suba a Aplicação Bia 2025 4.2.0
-
-### 1. Vá para o diretorio da Bia
-```bash
-cd bia
-
-### 2. Suba a aplicação com Docker Compose
-```bash
-docker-compose up -d
-
-### 3. Acesse a Aplicação via http:IP_PublicoInstacia:3001
-
-### 4. Acerte o IP da API no Dockerfile
-```bash
-vi Dockerfile
-Subistitua o endereço http://fomacao... pelo ip da Instacia, http://IpPublicoInstacia:3001
-
-### 5. Build o Dockerfile pelo Compose
-```bash
-docker-compose build server
-
-### 6. Reinicie o Container
-```bash
-docker-compose up -d
-
-***Apos os Testes***
-
-### 7. Destrua a Infraestrutura
-```bash
-terraform destroy -auto-approve
-
-🧠 Conhecimentos Aplicados
-
-    Terraform Fundamentals: init, plan, apply, destroy, output.
-
-    Gerenciamento de Estado: Configuração de backend remoto com S3 para estado compartilhado e seguro.
-
-    Importação de Recursos: Uso do terraform import para gerenciar infraestrutura pré-existente.
-
-    AWS EC2: Provisionamento completo de instâncias, including security groups e key pairs.
-
-    AWS IAM: Criação de roles e instance profiles para dar permissões à EC2.
-
-    User Data: Utilização de scripts de inicialização para automatizar a configuração da instância.
-
-🔐 Melhores Práticas Adotadas
-
-    Uso de variáveis para parametrizar configurações sensíveis.
-
-    Remote state para enable trabalho em equipe e evitar perda do estado local.
-
-    Uso de gitignore para não versionar arquivos sensíveis como .tfstate e .tfvars.
-
-👨‍💻 Autor
-
-Junior Fernandes
 ---
-[![Terraform](https://img.shields.io/badge/Terraform-1.0+-623CE4?logo=terraform&logoColor=white)](https://terraform.io)
-[![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?logo=amazon-aws&logoColor=white)](https://aws.amazon.com)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://docker.com)
-[![Node.js](https://img.shields.io/badge/Node.js-22-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org)
-[![React](https://img.shields.io/badge/React-Vite-61DAFB?logo=react&logoColor=black)](https://reactjs.org)
 
-**Serviço do Desafio:** Terraform + EC2
-**Objetivo:** Lançar uma máquina de trabalho na nuvem AWS (`bia-dev`) utilizando Terraform com estado remoto, seguindo as melhores práticas de Infrastructure as Code (IaC).
+## 🏗️ Arquitetura da Solução
 
-## 📋 Sobre o Projeto
+A arquitetura foi projetada para ser modular e escalável, seguindo as melhores práticas da AWS.
 
-Este projeto é a solução para o segundo desafio da mentoria Labs 2.0, focado em implementar infraestrutura automatizada e reprodutível na AWS usando Terraform. A instância EC2 é provisionada com todas as configurações necessárias, incluindo roles de IAM, security groups e scripts de inicialização via user data.
+### Infraestrutura como Código (Terraform)
 
-## 🏗️ Arquitetura
+O diretório `Terraform/` contém múltiplos módulos, organizados em camadas com dependências explícitas, gerenciadas via `terraform_remote_state`.
 
-O projeto provisiona os seguintes recursos na AWS:
+-   **`0-TerraformState`**: Configura o backend S3 para armazenar o estado do Terraform de forma remota e segura.
+-   **`1-VPC`**: Cria a fundação de rede (VPC, Subnets, Route Tables, Gateways).
+-   **`1a-SegGroup`**: Gerencia os Security Groups, que funcionam como firewalls virtuais.
+-   **`1b-IAM`**: Define as políticas e papéis (Roles) de IAM para garantir o acesso seguro entre os serviços.
+-   **`3-RDS`**: Provisiona uma instância de banco de dados relacional gerenciado pela AWS.
+-   **`3a-Orquestrador`**: Cria uma instância EC2 para servir como Bastion Host ou para tarefas de gerenciamento.
+-   **`5-ECR`**: Cria o Elastic Container Registry para armazenar as imagens Docker da aplicação "Bia".
+-   **`6-ECS`**: Orquestra a execução dos contêineres. A configuração utiliza o **tipo de inicialização EC2**, provisionando um cluster com:
+    -   **Launch Template**: Para padronizar a configuração das instâncias EC2.
+    -   **Auto Scaling Group**: Para gerenciar o número de instâncias e garantir a escalabilidade e resiliência.
+    -   **Capacity Provider**: Para conectar de forma flexível o cluster ao Auto Scaling Group.
 
-- **Amazon EC2 Instance:** Uma instância Amazon Linux para ambiente de desenvolvimento.
-- **Security Group:** Regras de firewall configuradas para permitir acesso SSH (porta 22) e tráfego de saída.
-- **IAM Role & Instance Profile:** Permissões concedidas à instância para interagir com outros serviços AWS de forma segura.
-- **Remote State Backend:** Configuração do estado do Terraform armazenado remotamente.
+### Aplicação (Bia)
+
+O diretório `bia/` contém uma aplicação web moderna e pronta para a nuvem.
+
+-   **Stack de Tecnologia**:
+    -   **Backend**: Node.js
+    -   **Frontend**: React (gerenciado com Vite)
+-   **Containerização**: O `Dockerfile` e o `compose.yml` permitem que a aplicação seja facilmente empacotada e executada em qualquer ambiente com Docker, facilitando o deploy no ECS.
+-   **CI/CD**: O arquivo `buildspec.yml` prepara o projeto para integração com serviços de pipeline da AWS como CodeBuild e CodePipeline.
+
+---
 
 ## 🛠️ Tecnologias Utilizadas
 
-[![AWS](https://img.shields.io/badge/AWS-EC2-FF9900?logo=amazonaws&logoColor=white)](https://aws.amazon.com/ec2/)
-[![Terraform](https://img.shields.io/badge/Terraform-IaC-623CE4?logo=terraform&logoColor=white)](https://terraform.io)
-[![Docker](https://img.shields.io/badge/Docker-Container-2496ED?logo=docker&logoColor=white)](https://docker.com)
-[![Node.js](https://img.shields.io/badge/Node.js-22-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org)
-[![React](https://img.shields.io/badge/React-Vite-61DAFB?logo=react&logoColor=black)](https://reactjs.org)
----
-[![Terraform](https://img.shields.io/badge/Terraform-1.0+-623CE4?logo=terraform&logoColor=white)](https://terraform.io)
-[![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?logo=amazon-aws&logoColor=white)](https://aws.amazon.com)
+-   **AWS (Amazon Web Services)**
+-   **Terraform**
+-   **Docker**
+-   **Node.js**
+-   **React**
 
-https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
-[![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com/)
-[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Terraform](https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white)](https://terraform.io/)
----
-[![CI/CD](https://github.com/seu-usuario/seu-repositorio/actions/workflows/main.yml/badge.svg)](https://github.com/seu-usuario/seu-repositorio/actions)
-[![Last Commit](https://img.shields.io/github/last-commit/seu-usuario/seu-repositorio.svg)](https://github.com/seu-usuario/seu-repositorio/commits/main)
-![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
-# Infrastructure as Code Project
-
-![Terraform](https://img.shields.io/badge/Terraform-1.5.0-623CE4.svg?logo=terraform)
-![AWS](https://img.shields.io/badge/AWS-EC2%2FS3%2FRDS-FF9900.svg?logo=amazonaws)
-![Ansible](https://img.shields.io/badge/Ansible-2.15-EE0000.svg?logo=ansible)
-![Docker](https://img.shields.io/badge/Docker-24.0-2496ED.svg?logo=docker)
-
-[![Terraform Validation](https://github.com/seu-usuario/iac-project/actions/workflows/terraform.yml/badge.svg)](https://github.com/seu-usuario/iac-project/actions)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Last Deployment](https://img.shields.io/badge/Last%20Deployment-2023--10--15-brightgreen.svg)](https://github.com/seu-usuario/iac-project/deployments)
----
-![Bright Green](https://img.shields.io/badge/Status-Bright_Green-brightgreen.svg)
-![Green](https://img.shields.io/badge/Status-Green-green.svg)
-![Yellow](https://img.shields.io/badge/Status-Yellow-yellow.svg)
-![Orange](https://img.shields.io/badge/Status-Orange-orange.svg)
-![Red](https://img.shields.io/badge/Status-Red-red.svg)
-![Blue](https://img.shields.io/badge/Status-Blue-blue.svg)
 ---
 
+## 🚀 Como Utilizar
 
+### Deploy da Infraestrutura
 
-🙏 Agradecimentos
+A infraestrutura deve ser implantada seguindo a ordem numérica dos diretórios no `Terraform/`, pois eles representam as dependências. Para cada diretório (de `0` a `6`):
 
-Agradeço a Deus em   Primeiro Lugar, pelas Bençãos diarias, ao mentor Henrylle Maia pela excelente didática e por promover a mentoria Desafio Labs 2.0, que é uma oportunidade invaluable para elevar nossas skills em cloud.
+1.  Navegue até o diretório do módulo: `cd Terraform/<diretorio_do_modulo>`
+2.  Inicialize o Terraform (necessário apenas na primeira vez):
+    ```bash
+    terraform init
+    ```
+3.  Revise o plano de execução:
+    ```bash
+    terraform plan -out=plan.out
+    ```
+4.  Aplique a configuração para criar os recursos:
+    ```bash
+    terraform apply "plan.out"
+    ```
+
+### Executando a Aplicação Localmente
+
+Para testar a aplicação "Bia" em sua máquina local:
+
+1.  Navegue até o diretório da aplicação: `cd bia/`
+2.  Utilize os scripts fornecidos para iniciar o ambiente com Docker Compose:
+    -   No Linux/macOS: `./rodar_app_local_unix.sh`
+    -   No Windows: `rodar_app_local_windows.bat`
+
+---
+
+## 👨‍💻 Autor
+
+**Junior Fernandes**

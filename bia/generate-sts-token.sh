@@ -40,7 +40,7 @@ show_help() {
     echo "  $0 meu-profile 3600 --export      # Token de 1 hora + export automático"
     echo "  $0 meu-profile --export           # Token de 1 hora + export automático"
     echo ""
-    
+
     if [[ "$os_type" == "windows" ]]; then
         echo "Para Windows (Git Bash/PowerShell/CMD):"
         echo "  # Git Bash:"
@@ -53,7 +53,7 @@ show_help() {
         echo "Para Unix/Linux/macOS:"
         echo "  source <($0 meu-profile --export)"
     fi
-    
+
     echo ""
     echo "Nota: Duração mínima é de 15 minutos (900 segundos)"
     echo "      Duração máxima é de 12 horas (43200 segundos)"
@@ -63,17 +63,17 @@ show_help() {
 check_dependencies() {
     local os_type=$(detect_os)
     local missing_deps=()
-    
+
     # Verifica AWS CLI
     if ! command -v aws &> /dev/null; then
         missing_deps+=("aws-cli")
     fi
-    
+
     # Verifica jq
     if ! command -v jq &> /dev/null; then
         missing_deps+=("jq")
     fi
-    
+
     if [[ ${#missing_deps[@]} -gt 0 ]]; then
         echo "Erro: Dependências não encontradas: ${missing_deps[*]}"
         echo ""
@@ -229,7 +229,7 @@ else
     echo "AWS_SECRET_ACCESS_KEY=${SECRET_KEY}"
     echo "AWS_SESSION_TOKEN=${SESSION_TOKEN}"
     echo ""
-    
+
     # Instruções específicas por sistema operacional
     case "$OS_TYPE" in
         "windows")
@@ -266,7 +266,7 @@ else
             echo "source <($0 ${PROFILE_NAME} ${DURATION} --export)"
             ;;
     esac
-    
+
     echo ""
     echo "=== Para usar em arquivo .env ==="
     echo "AWS_ACCESS_KEY_ID=${ACCESS_KEY}"

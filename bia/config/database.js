@@ -50,12 +50,12 @@ async function getConfig(){
 async function createSecretsManagerClient() {
   // Verifica se a variável de ambiente está definida e não está vazia
   let credentials;
-  
+
   if (process.env.IS_LOCAL === "true") {
     credentials = fromEnv();
     //credentials = fromIni({ profile: "SEU_PROFILE" });
   }
-  
+
   if (process.env.DB_SECRET_NAME) {
     // Instancia o cliente do Secrets Manager
     const client = new SecretsManagerClient({
@@ -111,4 +111,3 @@ async function getSecrets(secretsManagerClient) {
 }
 
 module.exports = getConfig;
-
