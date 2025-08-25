@@ -15,12 +15,10 @@ resource "aws_ecs_task_definition" "app" {
   network_mode             = "bridge"
   requires_compatibilities = ["EC2"]
   cpu                      = "1024" # 1 vCPU "256" # 0.25 vCPU
-  memory                   = "400"  # 400 MiB "512" # 512 MiB
+  memory                   = "512"  # 512 MiB
 
   # Role para que o ECS possa puxar a imagem do ECR e enviar logs
-  execution_role_arn = data.terraform_remote_state.iam.outputs.iam_instance_profile_ssm_profile_name.arn
-  #role_arn           = data.terraform_remote_state.iam.outputs.iam_instance_profile_ssm_profile_name.arn
-  #role_arn           = data.terraform_remote_state.iam.outputs.iam_task_execution_role_name.arn
+  execution_role_arn = data.terraform_remote_state.iam.outputs.ecs_task_execution_role_arn
   #role_arn           = aws_
   #ecs_instance_role_arn
   #task_execution_role_arn

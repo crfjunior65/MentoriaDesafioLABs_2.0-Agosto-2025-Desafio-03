@@ -12,7 +12,7 @@ resource "aws_autoscaling_group" "ecs" {
   data.terraform_remote_state.vpc.outputs.vpc_public_subnets_id[1]]
   min_size                  = 0
   desired_capacity          = 1
-  max_size                  = 2
+  max_size                  = 1
   health_check_grace_period = 0
   health_check_type         = "EC2"
   protect_from_scale_in     = false
