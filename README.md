@@ -1,97 +1,53 @@
-# 🚀 Projeto BIA - Aplicação Web em AWS ECS com Terraform
+# Desafio 03: Infraestrutura como Código (IaC) na AWS com Terraform
 
-Este projeto implementa a infraestrutura completa na AWS para hospedar a aplicação conteinerizada "Bia", utilizando Terraform para automação e gerenciamento (Infraestrutura como Código - IaC).
+## Visão Geral
 
-## 📋 Visão Geral do Projeto
+Este projeto implementa uma infraestrutura completa e automatizada na AWS para hospedar a aplicação "Bia", um serviço web full-stack. O principal objetivo é demonstrar o domínio de conceitos de Infraestrutura como Código (IaC) utilizando o Terraform para provisionar e gerenciar uma arquitetura cloud-nativa, segura e escalável.
 
-O objetivo é implantar uma aplicação web full-stack (Node.js + React) de forma automatizada, escalável e segura na AWS. A solução é dividida em duas partes principais:
+A arquitetura foi projetada para ser robusta, utilizando serviços gerenciados da AWS para otimizar a operação e a manutenção.
 
-1.  **Infraestrutura (`Terraform/`)**: Código Terraform que provisiona todos os recursos necessários na nuvem, desde a rede até o cluster de contêineres.
-2.  **Aplicação (`bia/`)**: O código-fonte da aplicação, já preparado para ser conteinerizado com Docker.
+## Arquitetura da Solução
 
----
+A infraestrutura provisionada pelo Terraform consiste nos seguintes componentes principais:
 
-## 🏗️ Arquitetura da Solução
+- **Rede (VPC):** Uma Virtual Private Cloud customizada com sub-redes públicas e privadas distribuídas em múltiplas zonas de disponibilidade para garantir alta disponibilidade.
+- **Segurança:** Security Groups para controle de tráfego em nível de instância e Roles do IAM para gerenciamento de permissões granulares entre os serviços.
+- **Banco de Dados (RDS):** Uma instância do Amazon RDS (PostgreSQL/MySQL) executando em uma sub-rede privada, com credenciais gerenciadas de forma segura pelo AWS Secrets Manager.
+- **Containerização (Docker & ECR):** A aplicação "Bia" é containerizada com o Docker, e a imagem é armazenada no Amazon Elastic Container Registry (ECR).
+- **Orquestração (ECS com EC2):** O Amazon Elastic Container Service (ECS) é utilizado para orquestrar os contêineres da aplicação, com instâncias EC2 como capacidade computacional, gerenciadas por um Auto Scaling Group.
+- **Load Balancer:** Um Application Load Balancer (ALB) distribui o tráfego de entrada para os contêineres, garantindo escalabilidade e resiliência.
 
-A arquitetura foi projetada para ser modular e escalável, seguindo as melhores práticas da AWS.
+## Pontos Fortes e Boas Práticas Adotadas
 
-### Infraestrutura como Código (Terraform)
+Este projeto se destaca pela aplicação de diversas boas práticas de mercado:
 
-O diretório `Terraform/` contém múltiplos módulos, organizados em camadas com dependências explícitas, gerenciadas via `terraform_remote_state`.
+- **Infraestrutura como Código (IaC) Modular:** A utilização do Terraform com uma estrutura de diretórios modular, onde cada componente da infraestrutura (VPC, IAM, RDS, etc.) é isolado, facilita a manutenção, o reuso de código e a colaboração.
+- **Gerenciamento de Estado Remoto:** O estado do Terraform é armazenado de forma segura e centralizada em um backend S3, uma prática essencial para ambientes de produção e trabalho em equipe.
+- **Automação de Deploy (CI/CD):** A presença de scripts de deploy (`deploy-ecs.sh`) e um arquivo `buildspec.yml` demonstra a preparação para um pipeline de integração e entrega contínua (CI/CD) com ferramentas como o AWS CodeBuild.
+- **Segurança por Design:** A arquitetura foi planejada com segurança em mente, utilizando sub-redes privadas para o banco de dados, roles do IAM com o princípio do menor privilégio e o AWS Secrets Manager para proteger informações sensíveis.
+- **Foco em Resiliência:** O uso de múltiplas zonas de disponibilidade, Auto Scaling Groups e um Load Balancer garante que a aplicação possa se recuperar de falhas e escalar de acordo com a demanda.
 
--   **`0-TerraformState`**: Configura o backend S3 para armazenar o estado do Terraform de forma remota e segura.
--   **`1-VPC`**: Cria a fundação de rede (VPC, Subnets, Route Tables, Gateways).
--   **`1a-SegGroup`**: Gerencia os Security Groups, que funcionam como firewalls virtuais.
--   **`1b-IAM`**: Define as políticas e papéis (Roles) de IAM para garantir o acesso seguro entre os serviços.
--   **`3-RDS`**: Provisiona uma instância de banco de dados relacional gerenciado pela AWS.
--   **`3a-Orquestrador`**: Cria uma instância EC2 para servir como Bastion Host ou para tarefas de gerenciamento.
--   **`5-ECR`**: Cria o Elastic Container Registry para armazenar as imagens Docker da aplicação "Bia".
--   **`6-ECS`**: Orquestra a execução dos contêineres. A configuração utiliza o **tipo de inicialização EC2**, provisionando um cluster com:
-    -   **Launch Template**: Para padronizar a configuração das instâncias EC2.
-    -   **Auto Scaling Group**: Para gerenciar o número de instâncias e garantir a escalabilidade e resiliência.
-    -   **Capacity Provider**: Para conectar de forma flexível o cluster ao Auto Scaling Group.
+## A Jornada de Aprendizado Contínuo
 
-### Aplicação (Bia)
+A construção deste projeto é um testemunho do aprendizado contínuo. Durante o desenvolvimento, enfrentamos e superamos desafios técnicos que aprofundaram o conhecimento sobre a integração fina entre os serviços da AWS e o Terraform.
 
-O diretório `bia/` contém uma aplicação web moderna e pronta para a nuvem.
+- **IAM Roles vs. Instance Profiles:** Um dos principais aprendizados foi a distinção crucial entre a `execution_role_arn` (utilizada pelo serviço ECS para acessar outros recursos da AWS) e o `instance_profile` (anexado a uma instância EC2). A correção deste detalhe no `TaskDefinition.tf` foi fundamental para o sucesso do deploy e solidificou o entendimento sobre o funcionamento do IAM.
+- **Alocação de Recursos (CPU/Memória):** O ajuste fino da alocação de memória entre a definição da tarefa ECS (`aws_ecs_task_definition`) e a definição do contêiner (`container_definitions`) demonstrou a importância de entender como os recursos são solicitados e gerenciados pelo orquestrador para garantir um deploy válido.
 
--   **Stack de Tecnologia**:
-    -   **Backend**: Node.js
-    -   **Frontend**: React (gerenciado com Vite)
--   **Containerização**: O `Dockerfile` e o `compose.yml` permitem que a aplicação seja facilmente empacotada e executada em qualquer ambiente com Docker, facilitando o deploy no ECS.
--   **CI/CD**: O arquivo `buildspec.yml` prepara o projeto para integração com serviços de pipeline da AWS como CodeBuild e CodePipeline.
+Cada erro não foi um bloqueio, mas uma oportunidade de refinar a infraestrutura e solidificar os conceitos de cloud computing.
 
----
+## Estrutura de Diretórios do Terraform
 
-## 🛠️ Tecnologias Utilizadas
+A organização modular do Terraform é um dos pilares deste projeto:
 
--   **AWS (Amazon Web Services)**
--   **Terraform**
--   **Docker**
--   **Node.js**
--   **React**
-
----
-
-## 🚀 Como Utilizar
-
-### Deploy da Infraestrutura
-
-A infraestrutura deve ser implantada seguindo a ordem numérica dos diretórios no `Terraform/`, pois eles representam as dependências. Para cada diretório (de `0` a `6`):
-
-1.  Navegue até o diretório do módulo: `cd Terraform/<diretorio_do_modulo>`
-2.  Inicialize o Terraform (necessário apenas na primeira vez):
-    ```bash
-    terraform init
-    ```
-3.  Revise o plano de execução:
-    ```bash
-    terraform plan -out=plan.out
-    ```
-4.  Aplique a configuração para criar os recursos:
-    ```bash
-    terraform apply "plan.out"
-    ```
-
-### Executando a Aplicação Localmente
-
-Para testar a aplicação "Bia" em sua máquina local:
-
-1.  Navegue até o diretório da aplicação: `cd bia/`
-2.  Utilize os scripts fornecidos para iniciar o ambiente com Docker Compose:
-    -   No Linux/macOS: `./rodar_app_local_unix.sh`
-    -   No Windows: `rodar_app_local_windows.bat`
-
----
-Formação AWS 5.0 - Mentoria de Deasafios 2.0 - @Henrylle Maia
----
-
-## 👨‍💻 Autor
-
-**Junior Fernandes**
-
--   LinkedIn: [linkedin.com/in/junior-fernandes65](https://www.linkedin.com/in/junior-fernandes65/)
--   GitHub: [github.com/JuniorFernandes](https://github.com/crfjunior65/)
--   Protifolio: [www.junior.tec.br](https://www.junior.tec.br/)
-
----
+```
+/Terraform
+├── 0-TerraformState/ # Configuração do Backend S3 para o estado remoto
+├── 1-VPC/            # Definição da VPC, sub-redes, gateways e tabelas de rota
+├── 1a-SegGroup/      # Gerenciamento dos Security Groups
+├── 1b-IAM/           # Criação das Roles e Policies do IAM
+├── 3-RDS/            # Provisionamento do Banco de Dados RDS e Secrets Manager
+├── 3a-Orquestrador/  # Instância EC2 para administração (Bastion Host)
+├── 5-ECR/            # Criação do repositório ECR para a imagem Docker
+└── 6-ECS/            # Configuração do Cluster ECS, Task Definition, Service e ALB
+```
