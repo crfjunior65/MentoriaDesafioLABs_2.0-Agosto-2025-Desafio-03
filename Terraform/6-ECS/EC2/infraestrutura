@@ -1,0 +1,16 @@
+data.aws_ssm_parameter.ecs_node_ami
+data.terraform_remote_state.ecr
+data.terraform_remote_state.iam
+data.terraform_remote_state.orquestrador
+data.terraform_remote_state.rds
+data.terraform_remote_state.sg
+data.terraform_remote_state.vpc
+aws_autoscaling_group.ecs
+aws_cloudwatch_log_group.bia_app_logs
+aws_ecs_capacity_provider.bia
+aws_ecs_cluster.foo
+aws_ecs_cluster_capacity_providers.main
+aws_launch_template.ecs_ec2
+aws_lb.main
+aws_lb_listener.http
+aws_lb_target_group.app

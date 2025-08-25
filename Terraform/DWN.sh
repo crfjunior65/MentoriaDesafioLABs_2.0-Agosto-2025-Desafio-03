@@ -68,8 +68,8 @@ cd 3a-Orquestrador
 #rm rf .terraform*
 #cd ..
 pwd
-terraform destroy -auto-approve
-rm -rf .terraform*
+###terraform destroy -auto-approve
+###rm -rf .terraform*
 cd ..
 
 #cd 2-EFS

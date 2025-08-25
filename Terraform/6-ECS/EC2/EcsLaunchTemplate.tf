@@ -9,7 +9,9 @@ resource "aws_launch_template" "ecs_ec2" {
   vpc_security_group_ids = [data.terraform_remote_state.sg.outputs.sg_bia_ec2] # Replace with your security group ID
   #[ aws_security_group.bia_ec2.id ]
 
-  iam_instance_profile { arn = data.terraform_remote_state.iam.outputs.iam_ssm_profile.arn }
+  iam_instance_profile {
+    arn = data.terraform_remote_state.iam.outputs.iam_instance_profile_ssm_profile_name.arn
+  }
 
   #aws_iam_instance_profile.ecs_node.name
 

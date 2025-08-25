@@ -5,23 +5,25 @@ RUN npm install -g npm@11.0.0 --loglevel=error
 
 # Instalando curl com versionamento e sem pacotes recomendados
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl=7.74.* && \
+    apt-get install -y --no-install-recommends curl=7.74.0-1.3+b1 \
+    git=1:2.39.2-1.1 && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
 
 # Copiar package.json raiz primeiro
-COPY package*.json ./
-RUN npm install --loglevel=error
+COPY client/package*.json ./client/
+RUN cd client && npm install --legacy-peer-deps --loglevel=error
 
 # Copiar package.json do client e instalar dependências
-COPY client/package*.json ./client/
-WORKDIR /usr/src/app/client
-RUN npm install --legacy-peer-deps --loglevel=error
+COPY . .
+#client/package*.json ./client/
+#WORKDIR /usr/src/app/client
+#RUN npm install --legacy-peer-deps --loglevel=error
 
 # Voltar ao diretório raiz e copiar todos os arquivos
-WORKDIR /usr/src/app
-COPY . .
+#WORKDIR /usr/src/app
+#COPY . .
 
 # Build do front-end com Vite
 WORKDIR /usr/src/app/client

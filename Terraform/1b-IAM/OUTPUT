@@ -1,4 +1,5 @@
 aws_ident = "873976612170"
+ecs_task_execution_role_arn = "arn:aws:iam::873976612170:role/ecs-task-execution-role-bia"
 iam_ec2_s3_role = {
   "arn" = "arn:aws:iam::873976612170:role/ec2-s3-role"
   "assume_role_policy" = "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ec2.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}"
