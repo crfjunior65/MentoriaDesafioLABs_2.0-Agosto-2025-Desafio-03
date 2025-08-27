@@ -58,19 +58,31 @@ graph TD
 
 ## 🛠️ Tecnologias Utilizadas
 
-| Ferramenta/Serviço | Finalidade |
-| ------------------ | -------------------------------------------------------------------- |
-| **Terraform** | Provisionamento e gerenciamento da infraestrutura como código (IaC). |
-| **Docker** | Containerização da aplicação para consistência entre ambientes. |
-| **AWS ECS** | Orquestração dos contêineres em produção. |
-| **AWS RDS** | Banco de dados PostgreSQL gerenciado, seguro e escalável. |
-| **AWS ECR** | Registro privado para armazenamento das imagens Docker. |
-| **AWS Secrets Manager**| Gerenciamento centralizado e seguro das credenciais do banco de dados.|
-| **AWS VPC** | Isolação da rede, com sub-redes públicas e privadas. |
-| **AWS IAM** | Controle de permissões granulares entre os serviços. |
-| **Node.js (Express)**| Backend da aplicação. |
-| **React (Vite)** | Frontend da aplicação. |
-| **Shell Script** | Automação de tarefas de build e deploy. |
+A espinha dorsal deste projeto é construída com tecnologias de ponta, focadas em automação, escalabilidade e segurança.
+
+### Infraestrutura e Automação (IaC & CI/CD)
+
+![Terraform](https://img.shields.io/badge/Terraform-%237B42BC.svg?style=for-the-badge&logo=terraform&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
+
+- **Terraform**: Orquestra e provisiona toda a infraestrutura na AWS de forma declarativa e modular.
+- **Docker**: Garante que a aplicação execute de forma consistente em qualquer ambiente, do desenvolvimento à produção.
+
+### Plataforma Cloud AWS
+
+![Amazon AWS](https://img.shields.io/badge/Amazon%20AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white) ![Amazon ECS](https://img.shields.io/badge/Amazon%20ECS-FF9900.svg?style=for-the-badge&logo=amazon-ecs&logoColor=white) ![Amazon RDS](https://img.shields.io/badge/Amazon%20RDS-527FFF.svg?style=for-the-badge&logo=amazon-rds&logoColor=white) ![Amazon ECR](https://img.shields.io/badge/Amazon%20ECR-232F3E.svg?style=for-the-badge&logo=amazon-ecr&logoColor=white) ![AWS Secrets Manager](https://img.shields.io/badge/AWS%20Secrets%20Manager-232F3E.svg?style=for-the-badge&logo=aws-secrets-manager&logoColor=white)
+
+- **Amazon ECS (Elastic Container Service)**: Orquestra a execução, o posicionamento e o escalonamento dos contêineres da aplicação.
+- **Amazon RDS (Relational Database Service)**: Fornece um banco de dados PostgreSQL gerenciado, resiliente e seguro.
+- **Amazon ECR (Elastic Container Registry)**: Armazena de forma privada e segura as imagens Docker da aplicação.
+- **AWS Secrets Manager**: Protege as credenciais do banco de dados, injetando-as de forma segura na aplicação em tempo de execução.
+- **VPC, IAM, ALB, etc**: Um conjunto completo de serviços de rede, segurança e balanceamento de carga para criar uma arquitetura robusta.
+
+### Aplicação
+
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+
+- **Node.js (com Express)**: Constrói a API backend da aplicação.
+- **React (com Vite)**: Desenvolve a interface de usuário (frontend) de forma moderna e performática.
 
 ## 🗂️ Estrutura de Diretórios
 
