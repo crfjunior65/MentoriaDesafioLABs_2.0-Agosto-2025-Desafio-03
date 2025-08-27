@@ -50,4 +50,6 @@
 | <a name="output_db_db_port"></a> [db\_db\_port](#output\_db\_db\_port) | n/a |
 | <a name="output_db_db_username"></a> [db\_db\_username](#output\_db\_db\_username) | n/a |
 | <a name="output_db_end_point"></a> [db\_end\_point](#output\_db\_end\_point) | n/a |
+| <a name="output_db_secret_arn"></a> [db\_secret\_arn](#output\_db\_secret\_arn) | ARN of the Secrets Manager secret for the DB |
+| <a name="output_db_secret_name"></a> [db\_secret\_name](#output\_db\_secret\_name) | Name of the Secrets Manager secret for the DB |
 <!-- END_TF_DOCS -->

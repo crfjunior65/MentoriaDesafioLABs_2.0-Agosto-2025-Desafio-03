@@ -10,6 +10,8 @@ aws_cloudwatch_log_group.bia_app_logs
 aws_ecs_capacity_provider.bia
 aws_ecs_cluster.foo
 aws_ecs_cluster_capacity_providers.main
+aws_ecs_service.app
+aws_ecs_task_definition.app
 aws_launch_template.ecs_ec2
 aws_lb.main
 aws_lb_listener.http

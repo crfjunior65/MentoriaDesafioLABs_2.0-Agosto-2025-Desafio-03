@@ -8,3 +8,5 @@ db_db_password = <sensitive>
 db_db_port = 5432
 db_db_username = "postgres"
 db_end_point = "bia.cybw0osiizjg.us-east-1.rds.amazonaws.com:5432"
+db_secret_arn = "arn:aws:secretsmanager:us-east-1:873976612170:secret:bia-rds-master-password-Gb8XwM"
+db_secret_name = "bia-rds-master-password"

@@ -28,9 +28,9 @@ cd ..
 
 cd 5-ECR
 pwd
-aws ecr delete-repository --repository-name bia --region us-east-1 --force
-terraform destroy -auto-approve
-rm -rf .terraform*
+#aws ecr delete-repository --repository-name bia --region us-east-1 --force
+#terraform destroy -auto-approve
+#rm -rf .terraform*
 cd ..
 
 #cd 4-Bucket
@@ -68,8 +68,8 @@ cd 3a-Orquestrador
 #rm rf .terraform*
 #cd ..
 pwd
-###terraform destroy -auto-approve
-###rm -rf .terraform*
+terraform destroy -auto-approve
+rm -rf .terraform*
 cd ..
 
 #cd 2-EFS

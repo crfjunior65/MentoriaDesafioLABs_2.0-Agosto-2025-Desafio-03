@@ -93,15 +93,26 @@ async function getSecrets(secretsManagerClient) {
   try {
     if (!secretsManagerClient) {
       console.error('O cliente do Secrets Manager não foi instanciado.');
-      return;
+      return null;
     }
     console.log(`Vou trabalhar com o secrets ${process.env.DB_SECRET_NAME}`);
     const command = new GetSecretValueCommand({ SecretId: process.env.DB_SECRET_NAME });
     const data = await secretsManagerClient.send(command);
 
     if ('SecretString' in data) {
-      return JSON.parse(data.SecretString);
+      try {
+        // Tenta analisar como JSON (padrão para segredos do RDS)
+        return JSON.parse(data.SecretString);
+      } catch (e) {
+        // Se falhar, assume que é um segredo de texto simples (apenas a senha)
+        console.log('Secret não é um JSON válido. Tratando como senha em texto plano.');
+        return {
+          username: process.env.DB_USER, // Pega o usuário do ambiente
+          password: data.SecretString
+        };
+      }
     } else {
+      // Lógica para segredo binário
       return Buffer.from(data.SecretBinary, 'base64');
     }
   } catch (err) {

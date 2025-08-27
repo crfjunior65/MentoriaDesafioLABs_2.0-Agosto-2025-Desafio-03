@@ -1,53 +1,152 @@
-# Desafio 03: Infraestrutura como Código (IaC) na AWS com Terraform
+# 🚀 Projeto BIA: Infraestrutura como Código (IaC) na AWS com Terraform
 
-## Visão Geral
+![Terraform](https://img.shields.io/badge/Terraform-%237B42BC.svg?style=for-the-badge&logo=terraform&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Amazon ECS](https://img.shields.io/badge/Amazon%20ECS-FF9900.svg?style=for-the-badge&logo=amazon-ecs&logoColor=white)
 
-Este projeto implementa uma infraestrutura completa e automatizada na AWS para hospedar a aplicação "Bia", um serviço web full-stack. O principal objetivo é demonstrar o domínio de conceitos de Infraestrutura como Código (IaC) utilizando o Terraform para provisionar e gerenciar uma arquitetura cloud-nativa, segura e escalável.
+Este repositório contém a implementação do **Projeto BIA**, uma aplicação web full-stack (Node.js + React) com sua infraestrutura na AWS totalmente provisionada e gerenciada com **Terraform**.
 
-A arquitetura foi projetada para ser robusta, utilizando serviços gerenciados da AWS para otimizar a operação e a manutenção.
+O projeto é um blueprint completo e prático para a implantação de aplicações modernas, seguras e escaláveis na nuvem, seguindo as melhores práticas de **Infraestrutura como Código (IaC)**, **CI/CD** e **Segurança**.
 
-## Arquitetura da Solução
+## 📜 Índice
 
-A infraestrutura provisionada pelo Terraform consiste nos seguintes componentes principais:
+- [✨ Pontos Fortes da Arquitetura](#-pontos-fortes-da-arquitetura)
+- [🏗️ Arquitetura da Solução](#️-arquitetura-da-solução)
+- [🛠️ Tecnologias Utilizadas](#️-tecnologias-utilizadas)
+- [🗂️ Estrutura de Diretórios](#️-estrutura-de-diretórios)
+- [⚙️ Pré-requisitos](#️-pré-requisitos)
+- [🚀 Subindo a Infraestrutura na AWS](#-subindo-a-infraestrutura-na-aws)
+- [🐳 Rodando Localmente com Docker](#-rodando-localmente-com-docker)
 
-- **Rede (VPC):** Uma Virtual Private Cloud customizada com sub-redes públicas e privadas distribuídas em múltiplas zonas de disponibilidade para garantir alta disponibilidade.
-- **Segurança:** Security Groups para controle de tráfego em nível de instância e Roles do IAM para gerenciamento de permissões granulares entre os serviços.
-- **Banco de Dados (RDS):** Uma instância do Amazon RDS (PostgreSQL/MySQL) executando em uma sub-rede privada, com credenciais gerenciadas de forma segura pelo AWS Secrets Manager.
-- **Containerização (Docker & ECR):** A aplicação "Bia" é containerizada com o Docker, e a imagem é armazenada no Amazon Elastic Container Registry (ECR).
-- **Orquestração (ECS com EC2):** O Amazon Elastic Container Service (ECS) é utilizado para orquestrar os contêineres da aplicação, com instâncias EC2 como capacidade computacional, gerenciadas por um Auto Scaling Group.
-- **Load Balancer:** Um Application Load Balancer (ALB) distribui o tráfego de entrada para os contêineres, garantindo escalabilidade e resiliência.
+## ✨ Pontos Fortes da Arquitetura
 
-## Pontos Fortes e Boas Práticas Adotadas
+Este projeto não é apenas uma aplicação, mas um ecossistema de deploy robusto que se destaca por:
 
-Este projeto se destaca pela aplicação de diversas boas práticas de mercado:
+- 🏛️ **Infraestrutura como Código (IaC) Modular**: O Terraform é organizado em módulos independentes (VPC, IAM, RDS, etc.), facilitando a manutenção, o reuso e a colaboração.
+- 🔒 **Segurança por Design (Security by Design)**: A arquitetura isola recursos críticos (como o banco de dados em sub-redes privadas) e gerencia segredos com o **AWS Secrets Manager**. As permissões são granulares, seguindo o princípio do menor privilégio com **IAM Roles**.
+- 🔄 **Automação de CI/CD**: O projeto está pronto para um pipeline de deploy automatizado. O `buildspec.yml` define os passos para o AWS CodeBuild, e o script `deploy-ecs.sh` orquestra a atualização no ECS sem downtime.
+- ☁️ **Cloud-Native e Escalável**: O uso de serviços gerenciados como **ECS**, **RDS** e **Application Load Balancer** cria uma base resiliente, escalável e de alta disponibilidade, distribuída em múltiplas zonas de disponibilidade.
+- 📦 **Containerização Consistente**: Com **Docker** e **Docker Compose**, o ambiente de desenvolvimento local espelha o ambiente de produção, eliminando o clássico "funciona na minha máquina".
 
-- **Infraestrutura como Código (IaC) Modular:** A utilização do Terraform com uma estrutura de diretórios modular, onde cada componente da infraestrutura (VPC, IAM, RDS, etc.) é isolado, facilita a manutenção, o reuso de código e a colaboração.
-- **Gerenciamento de Estado Remoto:** O estado do Terraform é armazenado de forma segura e centralizada em um backend S3, uma prática essencial para ambientes de produção e trabalho em equipe.
-- **Automação de Deploy (CI/CD):** A presença de scripts de deploy (`deploy-ecs.sh`) e um arquivo `buildspec.yml` demonstra a preparação para um pipeline de integração e entrega contínua (CI/CD) com ferramentas como o AWS CodeBuild.
-- **Segurança por Design:** A arquitetura foi planejada com segurança em mente, utilizando sub-redes privadas para o banco de dados, roles do IAM com o princípio do menor privilégio e o AWS Secrets Manager para proteger informações sensíveis.
-- **Foco em Resiliência:** O uso de múltiplas zonas de disponibilidade, Auto Scaling Groups e um Load Balancer garante que a aplicação possa se recuperar de falhas e escalar de acordo com a demanda.
+## 🏗️ Arquitetura da Solução
 
-## A Jornada de Aprendizado Contínuo
+O fluxo, do desenvolvimento ao deploy, foi desenhado para ser automatizado e seguro. O diagrama abaixo ilustra a interação entre os principais componentes:
 
-A construção deste projeto é um testemunho do aprendizado contínuo. Durante o desenvolvimento, enfrentamos e superamos desafios técnicos que aprofundaram o conhecimento sobre a integração fina entre os serviços da AWS e o Terraform.
+```mermaid
+graph TD
+    subgraph "👨‍💻 Ambiente do Desenvolvedor"
+        A[Dev] -- git push --> B{Repositório Git};
+    end
 
-- **IAM Roles vs. Instance Profiles:** Um dos principais aprendizados foi a distinção crucial entre a `execution_role_arn` (utilizada pelo serviço ECS para acessar outros recursos da AWS) e o `instance_profile` (anexado a uma instância EC2). A correção deste detalhe no `TaskDefinition.tf` foi fundamental para o sucesso do deploy e solidificou o entendimento sobre o funcionamento do IAM.
-- **Alocação de Recursos (CPU/Memória):** O ajuste fino da alocação de memória entre a definição da tarefa ECS (`aws_ecs_task_definition`) e a definição do contêiner (`container_definitions`) demonstrou a importância de entender como os recursos são solicitados e gerenciados pelo orquestrador para garantir um deploy válido.
+    subgraph "🔄 Pipeline CI/CD na AWS"
+        B -- Webhook --> C[AWS CodePipeline];
+        C -- Pega o Código --> D[AWS CodeBuild];
+        D -- Executa buildspec.yml --> E[Build da Imagem Docker];
+        E -- Envia Imagem --> F[Amazon ECR];
+    end
 
-Cada erro não foi um bloqueio, mas uma oportunidade de refinar a infraestrutura e solidificar os conceitos de cloud computing.
+    subgraph "🌐 Infraestrutura AWS (Provisionada via Terraform)"
+        G[Amazon ECS] -- Puxa Imagem do ECR --> F;
+        G -- Executa --> H[Task (Contêiner BIA)];
+        H -- Assume IAM Role --> I[AWS Secrets Manager];
+        I -- Fornece Credenciais --> H;
+        H -- Conecta --> J[Amazon RDS];
+        K[Cliente Final] -- HTTPS --> L[Application Load Balancer];
+        L -- Direciona Tráfego --> G;
+    end
 
-## Estrutura de Diretórios do Terraform
+    C -- Dispara Deploy --> G;
+```
 
-A organização modular do Terraform é um dos pilares deste projeto:
+## 🛠️ Tecnologias Utilizadas
+
+| Ferramenta/Serviço | Finalidade |
+| ------------------ | -------------------------------------------------------------------- |
+| **Terraform** | Provisionamento e gerenciamento da infraestrutura como código (IaC). |
+| **Docker** | Containerização da aplicação para consistência entre ambientes. |
+| **AWS ECS** | Orquestração dos contêineres em produção. |
+| **AWS RDS** | Banco de dados PostgreSQL gerenciado, seguro e escalável. |
+| **AWS ECR** | Registro privado para armazenamento das imagens Docker. |
+| **AWS Secrets Manager**| Gerenciamento centralizado e seguro das credenciais do banco de dados.|
+| **AWS VPC** | Isolação da rede, com sub-redes públicas e privadas. |
+| **AWS IAM** | Controle de permissões granulares entre os serviços. |
+| **Node.js (Express)**| Backend da aplicação. |
+| **React (Vite)** | Frontend da aplicação. |
+| **Shell Script** | Automação de tarefas de build e deploy. |
+
+## 🗂️ Estrutura de Diretórios
+
+A organização do projeto reflete a separação de responsabilidades entre a aplicação e a infraestrutura.
 
 ```
-/Terraform
-├── 0-TerraformState/ # Configuração do Backend S3 para o estado remoto
-├── 1-VPC/            # Definição da VPC, sub-redes, gateways e tabelas de rota
-├── 1a-SegGroup/      # Gerenciamento dos Security Groups
-├── 1b-IAM/           # Criação das Roles e Policies do IAM
-├── 3-RDS/            # Provisionamento do Banco de Dados RDS e Secrets Manager
-├── 3a-Orquestrador/  # Instância EC2 para administração (Bastion Host)
-├── 5-ECR/            # Criação do repositório ECR para a imagem Docker
-└── 6-ECS/            # Configuração do Cluster ECS, Task Definition, Service e ALB
+.
+├── bia/                # Código-fonte da aplicação Node.js/React e scripts de deploy
+│   ├── Dockerfile
+│   ├── buildspec.yml
+│   ├── compose.yml
+│   └── deploy-ecs.sh
+└── Terraform/          # Código da Infraestrutura (Terraform)
+    ├── 0-TerraformState/ # Backend S3 para o estado remoto
+    ├── 1-VPC/            # VPC, sub-redes, gateways, etc.
+    ├── 1a-SegGroup/      # Security Groups
+    ├── 1b-IAM/           # Roles e Policies do IAM
+    ├── 3-RDS/            # Banco de Dados RDS e Secrets Manager
+    ├── 5-ECR/            # Repositório ECR
+    └── 6-ECS/            # Cluster ECS, Task Definition, Service e ALB
 ```
+
+## ⚙️ Pré-requisitos
+
+Antes de começar, garanta que você tenha as seguintes ferramentas instaladas e configuradas:
+
+- [AWS CLI](https://aws.amazon.com/cli/)
+- [Terraform](https://www.terraform.io/downloads.html)
+- [Docker](https://www.docker.com/get-started) e Docker Compose
+
+## 🚀 Subindo a Infraestrutura na AWS
+
+Para provisionar toda a infraestrutura na nuvem, siga a ordem dos módulos do Terraform.
+
+> ⚠️ **Atenção:** Execute os comandos dentro de cada diretório respectivo.
+
+1.  **Configurar o Backend Remoto:**
+    ```bash
+    cd Terraform/0-TerraformState
+    terraform init
+    terraform apply
+    ```
+
+2.  **Provisionar os Módulos da Infraestrutura:**
+    Execute `terraform init && terraform apply` para cada um dos módulos na seguinte ordem:
+    - `1-VPC`
+    - `1a-SegGroup`
+    - `1b-IAM`
+    - `3-RDS`
+    - `5-ECR`
+    - `6-ECS`
+
+3.  **Fazer o Deploy da Aplicação:**
+    Após a infraestrutura estar no ar, navegue até a pasta da aplicação e use o script de deploy. Ele irá construir a imagem Docker, enviá-la ao ECR e atualizar o serviço no ECS.
+    ```bash
+    cd bia/
+    ./deploy-ecs.sh deploy
+    ```
+
+## 🐳 Rodando Localmente com Docker
+
+Para testar e desenvolver a aplicação em seu ambiente local:
+
+1.  **Inicie os contêineres:**
+    Na raiz do diretório `bia/`, execute:
+    ```bash
+    docker-compose up --build
+    ```
+    A aplicação estará disponível em `http://localhost:3001`.
+
+2.  **Executar Migrações do Banco (Localmente):**
+    Com os contêineres em execução, abra outro terminal e execute:
+    ```bash
+    # Para criar o banco de dados dentro do container Postgres
+    docker-compose exec server bash -c 'npx sequelize db:create'
+
+    # Para rodar as migrações
+    docker-compose exec server bash -c 'npx sequelize db:migrate'
+    ```

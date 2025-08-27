@@ -38,3 +38,13 @@ output "db_db_password" {
   sensitive = true
   value     = aws_db_instance.db-Projeto.password
 }
+
+output "db_secret_arn" {
+  description = "ARN of the Secrets Manager secret for the DB"
+  value       = aws_secretsmanager_secret.db_password_secret.arn
+}
+
+output "db_secret_name" {
+  description = "Name of the Secrets Manager secret for the DB"
+  value       = aws_secretsmanager_secret.db_password_secret.name
+}

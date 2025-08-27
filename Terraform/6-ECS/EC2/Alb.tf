@@ -53,7 +53,7 @@ resource "aws_lb_target_group" "app" {
   target_type = "instance" # Para ECS com EC2 em modo bridge/host
 
   health_check {
-    path                = "/"
+    path                = "/api/versao"
     protocol            = "HTTP"
     matcher             = "200-299"
     interval            = 30

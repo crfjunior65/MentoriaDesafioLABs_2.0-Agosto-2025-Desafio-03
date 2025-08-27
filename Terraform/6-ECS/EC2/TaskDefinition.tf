@@ -14,8 +14,8 @@ resource "aws_ecs_task_definition" "app" {
   family                   = "bia-app-tf-task"
   network_mode             = "bridge"
   requires_compatibilities = ["EC2"]
-  cpu                      = "1024" # 1 vCPU "256" # 0.25 vCPU
-  memory                   = "512"  # 512 MiB
+  #cpu                      = "1024" # 1 vCPU "256" # 0.25 vCPU
+  #memory                   = "512"  # 512 MiB
 
   # Role para que o ECS possa puxar a imagem do ECR e enviar logs
   execution_role_arn = data.terraform_remote_state.iam.outputs.ecs_task_execution_role_arn
@@ -28,20 +28,48 @@ resource "aws_ecs_task_definition" "app" {
     {
       name      = "bia-app-container"
       image     = "${data.terraform_remote_state.ecr.outputs.ecr_repository_url}:latest"
-      cpu       = 256
-      memory    = 512
+      cpu       = 1024
+      memory    = 400
       essential = true
       portMappings = [
         {
-          containerPort = 3001
+          containerPort = 8080
           hostPort      = 0 # Mapeamento de porta dinamico
+        }
+      ]
+      environment = [
+        {
+          name  = "DB_PORT"
+          value = tostring(data.terraform_remote_state.rds.outputs.db_db_port)
+        },
+        {
+          name  = "DB_HOST"
+          value = data.terraform_remote_state.rds.outputs.db_end_point
+        },
+        {
+          name  = "DB_NAME"
+          value = data.terraform_remote_state.rds.outputs.db_db_name
+        },
+        {
+          name  = "DB_USER"
+          value = data.terraform_remote_state.rds.outputs.db_db_username
+        },
+        {
+          name  = "AWS_REGION"
+          value = var.AWS_REGION
+        }
+      ]
+      secrets = [
+        {
+          name      = "DB_PASSWORD"
+          valueFrom = data.terraform_remote_state.rds.outputs.db_secret_arn
         }
       ]
       logConfiguration = {
         logDriver = "awslogs"
         options = {
           "awslogs-group"         = aws_cloudwatch_log_group.bia_app_logs.name
-          "awslogs-region"        = var.AWS_REGION #data.terraform_remote_state.vpc.outputs.aws_region
+          "awslogs-region"        = var.AWS_REGION
           "awslogs-stream-prefix" = "ecs"
         }
       }
