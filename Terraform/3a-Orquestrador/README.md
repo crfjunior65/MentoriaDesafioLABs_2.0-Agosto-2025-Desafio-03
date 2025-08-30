@@ -3,8 +3,8 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.10.0 |
-| <a name="provider_aws.sa-1"></a> [aws.sa-1](#provider\_aws.sa-1) | 6.10.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.11.0 |
+| <a name="provider_aws.sa-1"></a> [aws.sa-1](#provider\_aws.sa-1) | 6.11.0 |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
 ## Resources

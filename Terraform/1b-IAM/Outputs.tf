@@ -1,3 +1,7 @@
+#---------------------------------------------------------------------------
+# Outputs dos Recursos IAM
+#---------------------------------------------------------------------------
+
 output "ssm_role" {
   value = aws_iam_role.ssm_role.id
 }
@@ -19,15 +23,15 @@ output "iam_instance_profile_ssm_profile_name" {
 
 #aws_iam_role" "ec2_s3_role
 output "iam_ec2_s3_role" {
-  value = aws_iam_role.ec2_s3_role
+  value = aws_iam_role.ec2_admin_role
 }
 #aws_iam_role_policy_attachment" "s3_managed_policy
 output "iam_s3_atach_role" {
-  value = aws_iam_role_policy_attachment.s3_managed_policy
+  value = aws_iam_role_policy_attachment.AdministratorAccess_policy
 }
 #aws_iam_instance_profile" "s3_profile
-output "iam_s3_profile" {
-  value = aws_iam_instance_profile.s3_profile
+output "iam_admin_profile" {
+  value = aws_iam_instance_profile.admin_profile
 }
 
 #AWS  Identifier

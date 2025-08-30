@@ -1,4 +1,6 @@
-# Papel do IAM para a Execucao de Tarefas do ECS
+#---------------------------------------------------------------------------
+# Criação do papel IAM para execucao de tarefas do ECS
+#---------------------------------------------------------------------------
 
 resource "aws_iam_role" "ecs_task_execution_role" {
   name = "ecs-task-execution-role-bia"
@@ -29,4 +31,27 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_attachment" {
 resource "aws_iam_role_policy_attachment" "ecs_task_execution_attachment-secret-manager" {
   role       = aws_iam_role.ecs_task_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
+}
+
+# Politica para permitir a leitura do parametro de senha do RDS no SSM
+resource "aws_iam_policy" "ecs_ssm_parameter_policy" {
+  name        = "ecs-ssm-parameter-read-policy"
+  description = "Allow ECS tasks to read the RDS password from SSM Parameter Store"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect   = "Allow",
+        Action   = "ssm:GetParameters",
+        Resource = "arn:aws:ssm:us-east-1:${data.aws_caller_identity.current.account_id}:parameter/bia-rds-master-password"
+      }
+    ]
+  })
+}
+
+# Anexa a nova politica de leitura do SSM a role de execucao da tarefa
+resource "aws_iam_role_policy_attachment" "ecs_task_ssm_attachment" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = aws_iam_policy.ecs_ssm_parameter_policy.arn
 }

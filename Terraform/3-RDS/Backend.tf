@@ -1,3 +1,7 @@
+#---------------------------------------------------------------------------
+# Configuração do backend RDS para armazenar o estado do Terraform
+#---------------------------------------------------------------------------
+
 terraform {
   backend "s3" {
     bucket  = "crfjunior-tf-state-bia"

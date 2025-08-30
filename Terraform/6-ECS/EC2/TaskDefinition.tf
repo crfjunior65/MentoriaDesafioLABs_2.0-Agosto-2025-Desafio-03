@@ -19,9 +19,6 @@ resource "aws_ecs_task_definition" "app" {
 
   # Role para que o ECS possa puxar a imagem do ECR e enviar logs
   execution_role_arn = data.terraform_remote_state.iam.outputs.ecs_task_execution_role_arn
-  #role_arn           = aws_
-  #ecs_instance_role_arn
-  #task_execution_role_arn
 
   # Definicao do container
   container_definitions = jsonencode([
@@ -44,7 +41,7 @@ resource "aws_ecs_task_definition" "app" {
         },
         {
           name  = "DB_HOST"
-          value = data.terraform_remote_state.rds.outputs.db_end_point
+          value = data.terraform_remote_state.rds.outputs.db_db_address
         },
         {
           name  = "DB_NAME"
@@ -61,8 +58,8 @@ resource "aws_ecs_task_definition" "app" {
       ]
       secrets = [
         {
-          name      = "DB_PASSWORD"
-          valueFrom = data.terraform_remote_state.rds.outputs.db_secret_arn
+          name      = "DB_PWD"
+          valueFrom = data.terraform_remote_state.rds.outputs.db_secret_name
         }
       ]
       logConfiguration = {
