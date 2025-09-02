@@ -1,0 +1,60 @@
+{
+    "tasks": [
+        {
+            "attachments": [],
+            "attributes": [
+                {
+                    "name": "ecs.cpu-architecture",
+                    "value": "x86_64"
+                }
+            ],
+            "availabilityZone": "us-east-1a",
+            "capacityProviderName": "cluster-bia",
+            "clusterArn": "arn:aws:ecs:us-east-1:873976612170:cluster/cluster-bia-tf",
+            "connectivity": "CONNECTED",
+            "connectivityAt": "2025-08-30T13:00:45.737000-03:00",
+            "containerInstanceArn": "arn:aws:ecs:us-east-1:873976612170:container-instance/cluster-bia-tf/9e861d5713fe46bab41a09eaa1cee860",
+            "containers": [
+                {
+                    "containerArn": "arn:aws:ecs:us-east-1:873976612170:container/cluster-bia-tf/18d637532fb149f2b8b04e3eec7c3d53/2bd37ce0-b1e9-40d8-98e3-b2034d3acd21",
+                    "taskArn": "arn:aws:ecs:us-east-1:873976612170:task/cluster-bia-tf/18d637532fb149f2b8b04e3eec7c3d53",
+                    "name": "bia-app-container",
+                    "image": "873976612170.dkr.ecr.us-east-1.amazonaws.com/bia:latest",
+                    "lastStatus": "STOPPED",
+                    "networkInterfaces": [],
+                    "healthStatus": "UNKNOWN",
+                    "cpu": "1024",
+                    "memory": "400"
+                }
+            ],
+            "cpu": "1024",
+            "createdAt": "2025-08-30T13:00:45.737000-03:00",
+            "desiredStatus": "STOPPED",
+            "enableExecuteCommand": false,
+            "executionStoppedAt": "2025-08-30T13:00:49.998000-03:00",
+            "group": "service:bia-app-tf-service",
+            "healthStatus": "UNKNOWN",
+            "lastStatus": "STOPPED",
+            "launchType": "EC2",
+            "memory": "400",
+            "overrides": {
+                "containerOverrides": [
+                    {
+                        "name": "bia-app-container"
+                    }
+                ],
+                "inferenceAcceleratorOverrides": []
+            },
+            "startedBy": "ecs-svc/4339792244971474789",
+            "stopCode": "TaskFailedToStart",
+            "stoppedAt": "2025-08-30T13:00:51.382000-03:00",
+            "stoppedReason": "Invalid character '}' looking for beginning of value",
+            "stoppingAt": "2025-08-30T13:00:50.042000-03:00",
+            "tags": [],
+            "taskArn": "arn:aws:ecs:us-east-1:873976612170:task/cluster-bia-tf/18d637532fb149f2b8b04e3eec7c3d53",
+            "taskDefinitionArn": "arn:aws:ecs:us-east-1:873976612170:task-definition/bia-app-tf-task:15",
+            "version": 3
+        }
+    ],
+    "failures": []
+}

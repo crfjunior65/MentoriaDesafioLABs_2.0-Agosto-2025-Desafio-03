@@ -60,6 +60,12 @@ data "terraform_remote_state" "sg" {
   }
 }
 
+data "aws_acm_certificate" "ssl" {
+  domain      = "*.cloudfix.net.br" # Substitua pelo seu domínio
+  statuses    = ["ISSUED"]
+  most_recent = true
+}
+
 /*
 data "terraform_remote_state" "efs" {
   backend = "s3"

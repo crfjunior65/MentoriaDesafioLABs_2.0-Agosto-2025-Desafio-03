@@ -36,6 +36,10 @@ resource "aws_ecs_task_definition" "app" {
       ]
       environment = [
         {
+          name  = "PORT",
+          value = "8080"
+        },
+        {
           name  = "DB_PORT"
           value = tostring(data.terraform_remote_state.rds.outputs.db_db_port)
         },
@@ -58,8 +62,8 @@ resource "aws_ecs_task_definition" "app" {
       ]
       secrets = [
         {
-          name      = "DB_PWD"
-          valueFrom = data.terraform_remote_state.rds.outputs.db_secret_name
+          name      = "DB_PWD",
+          valueFrom = data.terraform_remote_state.rds.outputs.db_secret_arn
         }
       ]
       logConfiguration = {

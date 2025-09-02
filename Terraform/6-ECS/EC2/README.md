@@ -20,7 +20,9 @@
 | [aws_launch_template.ecs_ec2](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/launch_template) | resource |
 | [aws_lb.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb) | resource |
 | [aws_lb_listener.http](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener) | resource |
+| [aws_lb_listener.https](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener) | resource |
 | [aws_lb_target_group.app](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group) | resource |
+| [aws_route53_record.bia](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 
 ## Inputs
 
@@ -46,7 +48,10 @@
 
 | Name | Description |
 |------|-------------|
+| <a name="output_alb-arn"></a> [alb-arn](#output\_alb-arn) | n/a |
+| <a name="output_dns-alb"></a> [dns-alb](#output\_dns-alb) | n/a |
 | <a name="output_ecs-cluster-name"></a> [ecs-cluster-name](#output\_ecs-cluster-name) | n/a |
+| <a name="output_ecs-service-name"></a> [ecs-service-name](#output\_ecs-service-name) | n/a |
 <!-- END_TF_DOCS -->
 <!-- BEGIN_TF_DOCS -->
 ## Requirements

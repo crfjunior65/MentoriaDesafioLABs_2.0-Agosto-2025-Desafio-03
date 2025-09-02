@@ -60,6 +60,7 @@ resource "aws_lb_target_group" "app" {
     timeout             = 5
     healthy_threshold   = 2
     unhealthy_threshold = 2
+    port                = "traffic-port"
   }
 
   tags = {
