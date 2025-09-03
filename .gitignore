@@ -91,3 +91,4 @@ tokens-*.json
 tokens-*.json
 .pre-commit*.*
 Push.sh
+*.txt
